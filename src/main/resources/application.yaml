@@ -1,0 +1,29 @@
+server:
+    servlet:
+        context-path: /funvirtualreading/api
+
+spring:
+    profiles:
+        active: dev
+---
+spring:
+    config:
+        activate:
+            on-profile: dev
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/fun_virtual_reading
+        username: root
+        password: adminRoot_123
+    jpa:
+        database: MYSQL
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5Dialect
+                '[format_sql]': true
+        show-sql: true
+
+server:
+    port: 9080
