@@ -33,6 +33,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static com.alnicode.funvirtualreading.util.AppConstants.DATE_FORMAT;
+import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -59,7 +62,7 @@ public class Person {
     @Column(unique = true)
     private String email;
 
-    @DateTimeFormat(iso = ISO.DATE)
+    @DateTimeFormat(iso = ISO.DATE, pattern = DATE_FORMAT)
     @NotNull
     private LocalDate birthday;
 
@@ -73,7 +76,7 @@ public class Person {
     @JoinColumn(name = "nationality_id", insertable = false, updatable = false)
     private Nationality nationality;
 
-    @DateTimeFormat(iso = ISO.DATE_TIME)
+    @DateTimeFormat(iso = ISO.DATE_TIME, pattern = DATE_TIME_FORMAT)
     @Column(name = "registration_date")
     private LocalDateTime date;
 

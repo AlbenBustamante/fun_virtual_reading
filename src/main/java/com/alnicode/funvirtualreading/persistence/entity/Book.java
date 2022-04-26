@@ -30,6 +30,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -75,7 +77,7 @@ public class Book {
     @JoinColumn(name = "genre_id", insertable = false, updatable = false)
     private Genre genre;
 
-    @DateTimeFormat(iso = ISO.DATE_TIME)
+    @DateTimeFormat(iso = ISO.DATE_TIME, pattern = DATE_TIME_FORMAT)
     @Column(name = "publication_date")
     private LocalDateTime date;
 

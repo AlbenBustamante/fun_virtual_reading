@@ -25,6 +25,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -42,7 +44,7 @@ public class Comment {
     @Size(min = 1, max = 400)
     private String body;
 
-    @DateTimeFormat(iso = ISO.DATE_TIME)
+    @DateTimeFormat(iso = ISO.DATE_TIME, pattern = DATE_TIME_FORMAT)
     @Column(name = "publication_date")
     private LocalDateTime date;
 
