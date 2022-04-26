@@ -102,4 +102,14 @@ public class Person {
             this.date = LocalDateTime.now();
         }
     }
+
+    public void addBook(Book book) {
+        this.likes.add(book);
+        book.getPersons().add(this);
+    }
+
+    public void removeBook(Book book) {
+        this.likes.remove(book);
+        book.getPersons().remove(this);
+    }
 }
