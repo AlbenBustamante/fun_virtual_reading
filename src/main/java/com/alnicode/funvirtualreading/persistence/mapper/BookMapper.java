@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 
 import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
 
-@Mapper(componentModel = "spring", uses = { GenreMapper.class })
+@Mapper(componentModel = "spring")
 public interface BookMapper {
     @Mapping(target = "id", source = "bookId")
     @Mapping(target = "author", source = "person.email")
