@@ -12,6 +12,7 @@ import com.alnicode.funvirtualreading.persistence.repository.CollectionsBookRepo
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CollectionsBookServiceImpl implements ICollectionsBookService {
@@ -22,21 +23,25 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
     private CollectionsBookRepository repository;
 
     @Override
+    @Transactional
     public CollectionsBookResponse save(CollectionsBookRequest request) {
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CollectionsBookResponse> getAll() {
         return this.mapper.toResponses(this.repository.findAll());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<CollectionsBookResponse> get(long collectionId, long bookId) {
         return this.repository.findById(this.toPK(collectionId, bookId)).map(mapper::toResponse);
     }
 
     @Override
+    @Transactional
     public Optional<CollectionsBookResponse> update(long collectionId, long bookId, CollectionsBookRequest request) {
         var id = this.toPK(collectionId, bookId);
         
@@ -51,6 +56,7 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
     }
 
     @Override
+    @Transactional
     public boolean delete(long collectionId, long bookId) {
         try {
             this.repository.deleteById(this.toPK(collectionId, bookId));
