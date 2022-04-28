@@ -27,12 +27,12 @@ public abstract class CrudController<Request, Response> {
     protected abstract ICrudService<Request, Response> service();
 
     @GetMapping
-    public ResponseEntity<List<@Valid Response>> getAll() {
+    public ResponseEntity<List<Response>> getAll() {
         return ok(this.service().getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<@Valid Response> get(@Min(1L) @PathVariable("id") long id) {
+    public ResponseEntity<Response> get(@Min(1L) @PathVariable("id") long id) {
         return of(this.service().get(id));
     }
 
