@@ -8,6 +8,7 @@ import com.alnicode.funvirtualreading.domain.dto.PersonResponse;
 import com.alnicode.funvirtualreading.domain.service.IPersonService;
 import com.alnicode.funvirtualreading.persistence.entity.Person;
 import com.alnicode.funvirtualreading.persistence.mapper.PersonMapper;
+import com.alnicode.funvirtualreading.persistence.repository.BookRepository;
 import com.alnicode.funvirtualreading.persistence.repository.PersonRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class PersonServiceImpl extends DeleteService<Person> implements IPersonS
 
     @Autowired
     private PersonMapper mapper;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     @Override
     @Transactional
@@ -60,6 +64,36 @@ public class PersonServiceImpl extends DeleteService<Person> implements IPersonS
     @Override
     protected CrudRepository<Person, Long> repository() {
         return this.repository;
+    }
+
+	@Override
+    @Transactional
+	public Optional<PersonResponse> addLike(long personId, long bookId) {
+		var person = this.repository.findById(personId);
+        var book = this.bookRepository.findById(bookId);
+
+        if (!(person.isPresent() && book.isPresent())) {
+            return Optional.empty();
+        }
+
+        person.get().addBook(book.get());
+
+        return Optional.of(this.mapper.toResponse(this.repository.save(person.get())));
+	}
+
+    @Override
+    @Transactional
+    public Optional<PersonResponse> removeLike(long personId, long bookId) {
+        var person = this.repository.findById(personId);
+        var book = this.bookRepository.findById(bookId);
+
+        if (!(person.isPresent() && book.isPresent())) {
+            return Optional.empty();
+        }
+
+        person.get().removeBook(book.get());
+
+        return Optional.of(this.mapper.toResponse(this.repository.save(person.get())));
     }
     
 }
