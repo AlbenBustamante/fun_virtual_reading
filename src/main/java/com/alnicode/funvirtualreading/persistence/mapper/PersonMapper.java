@@ -20,6 +20,7 @@ public interface PersonMapper {
     PersonResponse toResponse(Person entity);
     List<PersonResponse> toResponses(List<Person> entities);
 
+    @Mapping(target = "birthday", dateFormat = DATE_FORMAT)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "nationality", ignore = true)
     @Mapping(target = "date", ignore = true)
