@@ -21,19 +21,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 @Validated
+@RestController
 public class CollectionsBookController {
     @Autowired
     private ICollectionsBookService service;
 
     @GetMapping("/collection_books")
-    public ResponseEntity<List<@Valid CollectionsBookResponse>> getAll() {
+    public ResponseEntity<List<CollectionsBookResponse>> getAll() {
         return ResponseEntity.ok(this.service.getAll());
     }
 
     @GetMapping("/collection/{collectionId}/book/{bookId}")
-    public ResponseEntity<@Valid CollectionsBookResponse> get(
+    public ResponseEntity<CollectionsBookResponse> get(
             @Min(1L) @PathVariable("collectionId") long collectionId,
             @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(this.service.get(collectionId, bookId));
