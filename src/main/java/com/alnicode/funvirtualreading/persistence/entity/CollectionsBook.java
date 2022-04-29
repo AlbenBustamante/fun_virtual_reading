@@ -38,12 +38,10 @@ public class CollectionsBook {
     private String note;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("collectionId")
     @JoinColumn(name = "collection_id", insertable = false, updatable = false)
     private Collection collection;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("bookId")
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     private Book book;
 }
