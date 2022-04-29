@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.alnicode.funvirtualreading.util.AppConstants.COLLECTIONS_BOOKS_PATH;
+
 @Validated
 @RestController
 public class CollectionsBookController {
@@ -32,19 +34,19 @@ public class CollectionsBookController {
         return ResponseEntity.ok(this.service.getAll());
     }
 
-    @GetMapping("/collection/{collectionId}/book/{bookId}")
+    @GetMapping(COLLECTIONS_BOOKS_PATH)
     public ResponseEntity<CollectionsBookResponse> get(
             @Min(1L) @PathVariable("collectionId") long collectionId,
             @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(this.service.get(collectionId, bookId));
     }
 
-    @PostMapping("/collection_books")
+    @PostMapping(COLLECTIONS_BOOKS_PATH)
     public ResponseEntity<CollectionsBookResponse> register(@Valid @RequestBody CollectionsBookRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.service.save(request));
     }
 
-    @PutMapping("/collection/{collectionId}/book/{bookId}")
+    @PutMapping(COLLECTIONS_BOOKS_PATH)
     public ResponseEntity<CollectionsBookResponse> update(
             @Min(1L) @PathVariable("collectionId") long collectionId,
             @Min(1L) @PathVariable("bookId") long bookId,
@@ -52,7 +54,7 @@ public class CollectionsBookController {
         return ResponseEntity.of(this.service.update(collectionId, bookId, request));
     }
 
-    @DeleteMapping("/collection/{collectionId}/book/{bookId}")
+    @DeleteMapping(COLLECTIONS_BOOKS_PATH)
     public ResponseEntity<CollectionsBookResponse> delete(
             @Min(1L) @PathVariable("collectionId") long collectionId,
             @Min(1L) @PathVariable("bookId") long bookId) {
