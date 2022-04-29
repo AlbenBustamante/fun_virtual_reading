@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.alnicode.funvirtualreading.util.AppConstants.LIKES_PATH;
+
 @Validated
 @RestController
 @RequestMapping("/persons")
@@ -28,14 +30,14 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
         return this.service;
     }
 
-    @PostMapping("/{id}/book/{bookId}")
+    @PostMapping(LIKES_PATH)
     public ResponseEntity<PersonResponse> addLike(
             @Min(1L) @PathVariable("id") long personId,
             @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(this.service.addLike(personId, bookId));
     }
 
-    @DeleteMapping("/{id}/book/{bookId}")
+    @DeleteMapping(LIKES_PATH)
     public ResponseEntity<PersonResponse> removeLike(
             @Min(1L) @PathVariable("id") long personId,
             @Min(1L) @PathVariable("bookId") long bookId) {
