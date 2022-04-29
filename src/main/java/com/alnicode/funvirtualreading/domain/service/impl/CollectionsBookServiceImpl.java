@@ -56,7 +56,6 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
     }
 
     @Override
-    @Transactional
     public boolean delete(long collectionId, long bookId) {
         try {
             this.repository.deleteById(this.toPK(collectionId, bookId));
