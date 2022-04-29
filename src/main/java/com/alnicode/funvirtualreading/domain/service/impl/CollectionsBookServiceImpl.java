@@ -24,8 +24,11 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
 
     @Override
     @Transactional
-    public CollectionsBookResponse save(CollectionsBookRequest request) {
-        return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
+    public CollectionsBookResponse save(long collectionId, long bookId, CollectionsBookRequest request) {
+        var entity = this.mapper.toEntity(request);
+        entity.setId(this.toPK(collectionId, bookId));
+        
+        return this.mapper.toResponse(this.repository.save(entity));
     }
 
     @Override

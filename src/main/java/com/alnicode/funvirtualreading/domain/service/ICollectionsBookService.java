@@ -7,7 +7,7 @@ import com.alnicode.funvirtualreading.domain.dto.CollectionsBookRequest;
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookResponse;
 
 public interface ICollectionsBookService {
-    CollectionsBookResponse save(CollectionsBookRequest request);
+    CollectionsBookResponse save(long collectionId, long bookId, CollectionsBookRequest request);
     List<CollectionsBookResponse> getAll();
     Optional<CollectionsBookResponse> get(long collectionId, long bookId);
     Optional<CollectionsBookResponse> update(long collectionId, long bookId, CollectionsBookRequest request);

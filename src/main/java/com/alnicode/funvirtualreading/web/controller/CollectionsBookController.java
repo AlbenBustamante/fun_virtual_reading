@@ -42,8 +42,12 @@ public class CollectionsBookController {
     }
 
     @PostMapping(COLLECTIONS_BOOKS_PATH)
-    public ResponseEntity<CollectionsBookResponse> register(@Valid @RequestBody CollectionsBookRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.service.save(request));
+    public ResponseEntity<CollectionsBookResponse> register(
+            @Min(1L) @PathVariable("collectionId") long collectionId,
+            @Min(1L) @PathVariable("bookId") long bookId,
+            @Valid @RequestBody CollectionsBookRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(this.service.save(collectionId, bookId, request));
     }
 
     @PutMapping(COLLECTIONS_BOOKS_PATH)
@@ -58,6 +62,7 @@ public class CollectionsBookController {
     public ResponseEntity<CollectionsBookResponse> delete(
             @Min(1L) @PathVariable("collectionId") long collectionId,
             @Min(1L) @PathVariable("bookId") long bookId) {
-        return this.service.delete(collectionId, bookId) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+        return this.service.delete(collectionId, bookId) ? ResponseEntity.ok().build()
+                : ResponseEntity.notFound().build();
     }
 }
