@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findByEmail(String email);
+    Optional<Person> findByPublishedBooksBookId(long bookId);
     Optional<List<Person>> findByNationalityId(long nationalityId);
     Optional<List<Person>> findByLikesBookId(long bookId);
 }

@@ -8,8 +8,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import com.alnicode.funvirtualreading.domain.dto.BookResponse;
 import com.alnicode.funvirtualreading.domain.dto.PersonRequest;
 import com.alnicode.funvirtualreading.domain.dto.PersonResponse;
+import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
 import com.alnicode.funvirtualreading.domain.service.IPersonService;
 
@@ -30,9 +32,17 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
     @Autowired
     private IPersonService service;
 
+    @Autowired
+    private IBookService bookService;
+
     @Override
     protected ICrudService<PersonRequest, PersonResponse> service() {
         return this.service;
+    }
+
+    @GetMapping("/{id}/books")
+    public ResponseEntity<List<BookResponse>> getPublishedBooks(@Min(1L) @PathVariable("id") long personId) {
+        return ResponseEntity.of(this.bookService.getByAuthorId(personId));
     }
 
     @GetMapping("/email/{email}")

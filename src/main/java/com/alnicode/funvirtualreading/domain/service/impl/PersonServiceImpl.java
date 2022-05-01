@@ -110,5 +110,10 @@ public class PersonServiceImpl extends DeleteService<Person> implements IPersonS
     public Optional<List<PersonResponse>> getByBooksLiked(long bookId) {
         return this.repository.findByLikesBookId(bookId).map(mapper::toResponses);
     }
+
+    @Override
+    public Optional<PersonResponse> getByPublishedBook(long bookId) {
+        return this.repository.findByPublishedBooksBookId(bookId).map(mapper::toResponse);
+    }
     
 }
