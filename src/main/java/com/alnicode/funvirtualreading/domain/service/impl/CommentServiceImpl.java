@@ -61,5 +61,15 @@ public class CommentServiceImpl extends DeleteService<Comment> implements IComme
     protected CrudRepository<Comment, Long> repository() {
         return this.repository;
     }
+
+    @Override
+    public Optional<List<CommentResponse>> getByPerson(long personId) {
+        return this.repository.findByPersonId(personId).map(mapper::toResponses);
+    }
+
+    @Override
+    public Optional<List<CommentResponse>> getByBook(long bookId) {
+        return this.repository.findByBookId(bookId).map(mapper::toResponses);
+    }
     
 }

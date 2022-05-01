@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface BookRepository extends JpaRepository<Book, Long> {
     Optional<List<Book>> findByPersonId(long personId);
     Optional<List<Book>> findByGenreId(long genreId);
+    Optional<Book> findByCommentsId(long commentId);
 }

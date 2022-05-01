@@ -71,5 +71,10 @@ public class BookServiceImpl extends DeleteService<Book> implements IBookService
     public Optional<List<BookResponse>> getByGenre(long genreId) {
         return this.repository.findByGenreId(genreId).map(mapper::toResponses);
     }
+
+    @Override
+    public Optional<BookResponse> getByComment(long commentId) {
+        return this.repository.findByCommentsId(commentId).map(mapper::toResponse);
+    }
     
 }
