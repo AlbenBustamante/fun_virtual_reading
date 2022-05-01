@@ -43,7 +43,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     @EqualsAndHashCode.Include
-    private long bookId;
+    private Long bookId;
 
     @NotNull
     @Size(min = 10, max = 130)
@@ -61,13 +61,13 @@ public class Book {
     @Min(1L)
     @Max(Long.MAX_VALUE)
     @Column(name = "person_id")
-    private long personId;
+    private Long personId;
 
     @NotNull
     @Min(1L)
     @Max(Long.MAX_VALUE)
     @Column(name = "genre_id")
-    private long genreId;
+    private Long genreId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id", insertable = false, updatable = false)

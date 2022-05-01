@@ -95,5 +95,20 @@ public class PersonServiceImpl extends DeleteService<Person> implements IPersonS
 
         return Optional.of(this.mapper.toResponse(this.repository.save(person.get())));
     }
+
+    @Override
+    public Optional<PersonResponse> getByEmail(String email) {
+        return this.repository.findByEmail(email).map(mapper::toResponse);
+    }
+
+    @Override
+    public Optional<List<PersonResponse>> getByNationality(long nationalityId) {
+        return this.repository.findByNationalityId(nationalityId).map(mapper::toResponses);
+    }
+
+    @Override
+    public Optional<List<PersonResponse>> getByBooksLiked(long bookId) {
+        return this.repository.findByLikesBookId(bookId).map(mapper::toResponses);
+    }
     
 }
