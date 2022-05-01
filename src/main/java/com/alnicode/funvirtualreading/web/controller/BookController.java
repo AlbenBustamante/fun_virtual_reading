@@ -6,9 +6,11 @@ import javax.validation.constraints.Min;
 
 import com.alnicode.funvirtualreading.domain.dto.BookRequest;
 import com.alnicode.funvirtualreading.domain.dto.BookResponse;
+import com.alnicode.funvirtualreading.domain.dto.GenreResponse;
 import com.alnicode.funvirtualreading.domain.dto.PersonResponse;
 import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
+import com.alnicode.funvirtualreading.domain.service.IGenreService;
 import com.alnicode.funvirtualreading.domain.service.IPersonService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
     @Autowired
     private IPersonService personService;
 
+    @Autowired
+    private IGenreService genreService;
+
     @Override
     protected ICrudService<BookRequest, BookResponse> service() {
         return this.service;
@@ -45,7 +50,13 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
     }
 
     @GetMapping("/{id}/author")
-    public ResponseEntity<PersonResponse> getAuthor(@Min(1L) @PathVariable("id") long personId) {
-        return ResponseEntity.of(this.personService.getByPublishedBook(personId));
+    public ResponseEntity<PersonResponse> getAuthor(@Min(1L) @PathVariable("id") long bookId) {
+        return ResponseEntity.of(this.personService.getByPublishedBook(bookId));
     }
+
+    @GetMapping("/{id}/genre")
+    public ResponseEntity<GenreResponse> getGenre(@Min(1L) @PathVariable("id") long bookId) {
+        return ResponseEntity.of(this.genreService.getByBookId(bookId));
+    }
+
 }

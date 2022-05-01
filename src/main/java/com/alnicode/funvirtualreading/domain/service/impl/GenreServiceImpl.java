@@ -58,5 +58,10 @@ public class GenreServiceImpl extends DeleteService<Genre> implements IGenreServ
     protected CrudRepository<Genre, Long> repository() {
         return this.repository;
     }
+
+    @Override
+    public Optional<GenreResponse> getByBookId(long bookId) {
+        return this.repository.findByBooksBookId(bookId).map(mapper::toResponse);
+    }
     
 }
