@@ -56,5 +56,15 @@ public class NationalityServiceImpl extends DeleteService<Nationality> implement
     protected CrudRepository<Nationality, Long> repository() {
         return this.repository;
     }
+
+    @Override
+    public List<NationalityResponse> getAllOrderByCountry() {
+        return this.mapper.toResponses(this.repository.findAllByOrderByCountry());
+    }
+
+    @Override
+    public Optional<NationalityResponse> getByCountry(String country) {
+        return this.repository.findByCountry(country).map(mapper::toResponse);
+    }
     
 }
