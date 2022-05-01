@@ -66,5 +66,10 @@ public class NationalityServiceImpl extends DeleteService<Nationality> implement
     public Optional<NationalityResponse> getByCountry(String country) {
         return this.repository.findByCountry(country).map(mapper::toResponse);
     }
+
+    @Override
+    public Optional<NationalityResponse> getByAuthorId(long personId) {
+        return this.repository.findByPersonsId(personId).map(mapper::toResponse);
+    }
     
 }

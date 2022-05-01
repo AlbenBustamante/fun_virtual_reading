@@ -9,4 +9,5 @@ import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
 public interface INationalityService extends ICrudService<NationalityRequest, NationalityResponse> {
     List<NationalityResponse> getAllOrderByCountry();
     Optional<NationalityResponse> getByCountry(String country);
+    Optional<NationalityResponse> getByAuthorId(long personId);
 }

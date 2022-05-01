@@ -9,10 +9,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 import com.alnicode.funvirtualreading.domain.dto.BookResponse;
+import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
 import com.alnicode.funvirtualreading.domain.dto.PersonRequest;
 import com.alnicode.funvirtualreading.domain.dto.PersonResponse;
 import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
+import com.alnicode.funvirtualreading.domain.service.INationalityService;
 import com.alnicode.funvirtualreading.domain.service.IPersonService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +37,22 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
     @Autowired
     private IBookService bookService;
 
+    @Autowired
+    private INationalityService nationalityService;
+
     @Override
     protected ICrudService<PersonRequest, PersonResponse> service() {
         return this.service;
     }
 
     @GetMapping("/{id}/books")
-    public ResponseEntity<List<BookResponse>> getPublishedBooks(@Min(1L) @PathVariable("id") long personId) {
+    public ResponseEntity<List<BookResponse>> getAllPublishedBooks(@Min(1L) @PathVariable("id") long personId) {
         return ResponseEntity.of(this.bookService.getByAuthorId(personId));
+    }
+
+    @GetMapping("/{id}/nationality")
+    public ResponseEntity<NationalityResponse> getNationality(@Min(1L) @PathVariable("id") long personId) {
+        return ResponseEntity.of(this.nationalityService.getByAuthorId(personId));
     }
 
     @GetMapping("/email/{email}")
@@ -51,7 +61,7 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
     }
 
     @GetMapping("nationality/{id}")
-    public ResponseEntity<List<PersonResponse>> getByNationality(@Min(1L) @PathVariable("id") long nationalityId) {
+    public ResponseEntity<List<PersonResponse>> getAllByNationality(@Min(1L) @PathVariable("id") long nationalityId) {
         return ResponseEntity.of(this.service.getByNationality(nationalityId));
     }
 

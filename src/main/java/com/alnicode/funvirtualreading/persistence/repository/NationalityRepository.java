@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface NationalityRepository extends JpaRepository<Nationality, Long> {
     List<Nationality> findAllByOrderByCountry();
     Optional<Nationality> findByCountry(String country);
+    Optional<Nationality> findByPersonsId(long personId);
 }
