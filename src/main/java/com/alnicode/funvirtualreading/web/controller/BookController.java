@@ -38,4 +38,14 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
     public ResponseEntity<List<PersonResponse>> getPersonsWhoLikedIt(@Min(1L) @PathVariable("id") long id) {
         return ResponseEntity.of(this.personService.getByBooksLiked(id));
     }
+
+    @GetMapping("/genre/{id}")
+    public ResponseEntity<List<BookResponse>> getByGenre(@Min(1L) @PathVariable("id") long genreId) {
+        return ResponseEntity.of(this.service.getByGenre(genreId));
+    }
+
+    @GetMapping("/author/{id}")
+    public ResponseEntity<List<BookResponse>> getByAuthor(@Min(1L) @PathVariable("id") long personId) {
+        return ResponseEntity.of(this.service.getByAuthorId(personId));
+    }
 }

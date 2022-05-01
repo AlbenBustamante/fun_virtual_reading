@@ -61,5 +61,15 @@ public class BookServiceImpl extends DeleteService<Book> implements IBookService
     protected CrudRepository<Book, Long> repository() {
         return this.repository;
     }
+
+    @Override
+    public Optional<List<BookResponse>> getByAuthorId(long personId) {
+        return this.repository.findByPersonId(personId).map(mapper::toResponses);
+    }
+
+    @Override
+    public Optional<List<BookResponse>> getByGenre(long genreId) {
+        return this.repository.findByGenreId(genreId).map(mapper::toResponses);
+    }
     
 }
