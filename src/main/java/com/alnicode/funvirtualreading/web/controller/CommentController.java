@@ -44,9 +44,4 @@ public class CommentController extends CrudController<CommentRequest, CommentRes
         return ResponseEntity.of(this.service.getByPerson(personId));
     }
 
-    @GetMapping("/book/{id}")
-    public ResponseEntity<List<CommentResponse>> getAllByBook(@Min(1L) @PathVariable("id") long bookId) {
-        return ResponseEntity.of(this.service.getByBook(bookId));
-    }
-
 }
