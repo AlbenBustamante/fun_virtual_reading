@@ -34,7 +34,8 @@ public class SwaggerConfig {
                     "Did you like some book? You can add to your \"likes\" collection or create your collections.\n" +
                     "\nHave fun!")
                 .contact(this.contact())
-                .license("Apache License 2.0")
+                .version("1.0")
+                .license("Apache License, Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
                 .build();
     }

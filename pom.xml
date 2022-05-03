@@ -10,10 +10,10 @@
 	</parent>
 	<groupId>com.alnicode</groupId>
 	<artifactId>fun-virtual-reading</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>war</packaging>
 	<name>fun-virtual-reading</name>
-	<description>Demo project for Spring Boot</description>
+	<description>It's a RESTful API for a virtual library.</description>
 	<properties>
 		<java.version>11</java.version>
 		<mapstruct.version>1.4.2.Final</mapstruct.version>
