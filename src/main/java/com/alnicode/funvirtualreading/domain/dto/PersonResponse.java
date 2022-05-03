@@ -14,5 +14,5 @@ public class PersonResponse {
     private String birthday;
     private String nationality;
     private String date;
-    private Set<BookResponse> likes = new HashSet<>();
+    private Set<LikeResponse> likes = new HashSet<>();
 }
