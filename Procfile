@@ -1,0 +1,1 @@
+web: java -jar -Dspring.profiles.active=pdn target/fun-virtual-reading-1.0.war
