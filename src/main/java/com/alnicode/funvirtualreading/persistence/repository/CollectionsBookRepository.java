@@ -1,5 +1,7 @@
 package com.alnicode.funvirtualreading.persistence.repository;
 
+import java.util.List;
+
 import com.alnicode.funvirtualreading.persistence.entity.CollectionsBook;
 import com.alnicode.funvirtualreading.persistence.entity.CollectionsBookPK;
 
@@ -8,5 +10,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CollectionsBookRepository extends JpaRepository<CollectionsBook, CollectionsBookPK> {
-    
+    List<CollectionsBook> findAllByOrderByRatingAsc();
 }

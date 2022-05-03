@@ -75,5 +75,10 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
 
         return id;
     }
+
+    @Override
+    public List<CollectionsBookResponse> getAllOrderByRating() {
+        return this.mapper.toResponses(this.repository.findAllByOrderByRatingAsc());
+    }
     
 }

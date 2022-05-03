@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.alnicode.funvirtualreading.util.AppConstants.COLLECTIONS_BOOKS_PATH;
@@ -30,8 +31,8 @@ public class CollectionsBookController {
     private ICollectionsBookService service;
 
     @GetMapping("/collection_books")
-    public ResponseEntity<List<CollectionsBookResponse>> getAll() {
-        return ResponseEntity.ok(this.service.getAll());
+    public ResponseEntity<List<CollectionsBookResponse>> getAll(@RequestParam(required = false) boolean rating) {
+        return ResponseEntity.ok(rating ? this.service.getAll() : this.service.getAllOrderByRating());
     }
 
     @GetMapping(COLLECTIONS_BOOKS_PATH)

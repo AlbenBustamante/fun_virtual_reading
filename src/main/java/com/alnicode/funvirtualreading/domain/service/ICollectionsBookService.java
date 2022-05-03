@@ -12,4 +12,5 @@ public interface ICollectionsBookService {
     Optional<CollectionsBookResponse> get(long collectionId, long bookId);
     Optional<CollectionsBookResponse> update(long collectionId, long bookId, CollectionsBookRequest request);
     boolean delete(long collectionId, long bookId);
+    List<CollectionsBookResponse> getAllOrderByRating();
 }
