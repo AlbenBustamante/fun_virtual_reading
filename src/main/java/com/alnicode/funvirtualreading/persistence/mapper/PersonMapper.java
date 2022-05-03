@@ -12,7 +12,7 @@ import com.alnicode.funvirtualreading.persistence.entity.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = { BookMapper.class, LikeMapper.class })
+@Mapper(componentModel = "spring", uses = { LikeMapper.class })
 public interface PersonMapper {
     @Mapping(target = "birthday", dateFormat = DATE_FORMAT)
     @Mapping(target = "date", dateFormat = DATE_TIME_FORMAT)
