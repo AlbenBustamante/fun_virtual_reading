@@ -22,7 +22,7 @@ You can access the application here:
 - https://alnicode-fun-virtual-reading.herokuapp.com/funvirtualreading/api/swagger-ui/
 - `username: my_admin`
 - `password: adminroot123`
-- 
+ 
 ### How did I do it?
 I developed it from the Spring Boot Frameworks, Spring Data and Spring Security (basic security).
 
