@@ -102,21 +102,25 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<UserResponse> getByEmail(String email) {
         return this.repository.findByEmail(email).map(mapper::toResponse);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<UserResponse>> getByNationality(long nationalityId) {
         return this.repository.findByNationalityId(nationalityId).map(mapper::toResponses);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<List<UserResponse>> getByBooksLiked(long bookId) {
         return this.repository.findByLikesBookId(bookId).map(mapper::toResponses);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<UserResponse> getByPublishedBook(long bookId) {
         return this.repository.findByPublishedBooksBookId(bookId).map(mapper::toResponse);
     }

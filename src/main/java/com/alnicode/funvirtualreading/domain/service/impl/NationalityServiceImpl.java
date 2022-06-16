@@ -65,16 +65,19 @@ public class NationalityServiceImpl implements INationalityService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<NationalityResponse> getAllOrderByCountry() {
         return this.mapper.toResponses(this.repository.findAllByOrderByCountry());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<NationalityResponse> getByCountry(String country) {
         return this.repository.findByCountry(country).map(mapper::toResponse);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<NationalityResponse> getByAuthorId(long personId) {
         return this.repository.findByPersonsId(personId).map(mapper::toResponse);
     }

@@ -65,6 +65,7 @@ public class GenreServiceImpl implements IGenreService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<GenreResponse> getByBookId(long bookId) {
         return this.repository.findByBooksBookId(bookId).map(mapper::toResponse);
     }
