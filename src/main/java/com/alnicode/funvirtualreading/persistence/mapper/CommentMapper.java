@@ -3,7 +3,6 @@ package com.alnicode.funvirtualreading.persistence.mapper;
 import com.alnicode.funvirtualreading.domain.dto.CommentRequest;
 import com.alnicode.funvirtualreading.domain.dto.CommentResponse;
 import com.alnicode.funvirtualreading.persistence.entity.Comment;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -18,7 +17,7 @@ import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
  * @since 1.0
  */
 @Mapper(componentModel = "spring")
-public interface CommentMapper {
+public interface CommentMapper extends BaseMapper<CommentResponse, Comment> {
 
     /**
      * Map a comment entity to the comment response DTO.
@@ -30,14 +29,6 @@ public interface CommentMapper {
     @Mapping(target = "book", source = "book.title")
     @Mapping(target = "user", source = "user.username")
     CommentResponse toResponse(Comment entity);
-
-    /**
-     * Map an entities list to the responses list.
-     *
-     * @param entities the list to be mapped
-     * @return the responses list
-     */
-    List<CommentResponse> toResponses(List<Comment> entities);
 
     /**
      * Map a comment request DTO to the comment entity

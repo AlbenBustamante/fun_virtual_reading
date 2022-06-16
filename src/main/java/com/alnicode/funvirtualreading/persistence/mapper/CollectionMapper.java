@@ -3,7 +3,6 @@ package com.alnicode.funvirtualreading.persistence.mapper;
 import com.alnicode.funvirtualreading.domain.dto.CollectionRequest;
 import com.alnicode.funvirtualreading.domain.dto.CollectionResponse;
 import com.alnicode.funvirtualreading.persistence.entity.Collection;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -18,7 +17,7 @@ import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
  * @since 1.0
  */
 @Mapper(componentModel = "spring", uses = {CollectionsBookMapper.class})
-public interface CollectionMapper {
+public interface CollectionMapper extends BaseMapper<CollectionResponse, Collection> {
 
     /**
      * Map a collection entity to the collection response DTO.
@@ -30,14 +29,6 @@ public interface CollectionMapper {
     @Mapping(target = "user", source = "user.username")
     @Mapping(target = "date", dateFormat = DATE_TIME_FORMAT)
     CollectionResponse toResponse(Collection entity);
-
-    /**
-     * Map an entities list to responses list.
-     *
-     * @param entities the list to be mapped
-     * @return the responses list
-     */
-    List<CollectionResponse> toResponses(List<Collection> entities);
 
     /**
      * Map a collection request DTO to the collection entity.

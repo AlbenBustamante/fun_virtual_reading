@@ -3,7 +3,6 @@ package com.alnicode.funvirtualreading.persistence.mapper;
 import com.alnicode.funvirtualreading.domain.dto.NationalityRequest;
 import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
 import com.alnicode.funvirtualreading.persistence.entity.Nationality;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -15,7 +14,7 @@ import org.mapstruct.Mapping;
  * @since 1.0
  */
 @Mapper(componentModel = "spring")
-public interface NationalityMapper {
+public interface NationalityMapper extends BaseMapper<NationalityResponse, Nationality> {
 
     /**
      * Map a nationality entity to the nationality response DTO.
@@ -24,14 +23,6 @@ public interface NationalityMapper {
      * @return the {@link NationalityResponse} DTO
      */
     NationalityResponse toResponse(Nationality entity);
-
-    /**
-     * Map an entities list to the responses list.
-     *
-     * @param entities the list to be mapped
-     * @return the responses list
-     */
-    List<NationalityResponse> toResponses(List<Nationality> entities);
 
     /**
      * Map a nationality request DTO to the nationality entity.

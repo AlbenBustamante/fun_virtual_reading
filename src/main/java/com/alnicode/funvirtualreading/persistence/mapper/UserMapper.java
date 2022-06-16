@@ -3,7 +3,6 @@ package com.alnicode.funvirtualreading.persistence.mapper;
 import com.alnicode.funvirtualreading.domain.dto.UserRequest;
 import com.alnicode.funvirtualreading.domain.dto.UserResponse;
 import com.alnicode.funvirtualreading.persistence.entity.User;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -3,7 +3,6 @@ package com.alnicode.funvirtualreading.persistence.mapper;
 import com.alnicode.funvirtualreading.domain.dto.GenreRequest;
 import com.alnicode.funvirtualreading.domain.dto.GenreResponse;
 import com.alnicode.funvirtualreading.persistence.entity.Genre;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -15,7 +14,7 @@ import org.mapstruct.Mapping;
  * @since 1.0
  */
 @Mapper(componentModel = "spring")
-public interface GenreMapper {
+public interface GenreMapper extends BaseMapper<GenreResponse, Genre> {
 
     /**
      * Map a genre entity to the genre response DTO.
@@ -24,14 +23,6 @@ public interface GenreMapper {
      * @return the {@link GenreResponse} DTO
      */
     GenreResponse toResponse(Genre entity);
-
-    /**
-     * Map an entities list to the responses list.
-     *
-     * @param entities the list to be mapped
-     * @return the responses list
-     */
-    List<GenreResponse> toResponses(List<Genre> entities);
 
     /**
      * Map a genre request DTO to the genre entity.
