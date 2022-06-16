@@ -19,7 +19,7 @@ public class CommentRequest {
 
     @NotNull
     @Min(1L)
-    private long personId;
+    private long userId;
 
     @NotNull
     @Min(1L)

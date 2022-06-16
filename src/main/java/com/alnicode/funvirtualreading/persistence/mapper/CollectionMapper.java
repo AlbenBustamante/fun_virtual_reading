@@ -27,7 +27,7 @@ public interface CollectionMapper {
      * @return the {@link CollectionResponse} DTO
      */
     @Mapping(target = "id", source = "collectionId")
-    @Mapping(target = "person", source = "person.email")
+    @Mapping(target = "user", source = "user.username")
     @Mapping(target = "date", dateFormat = DATE_TIME_FORMAT)
     CollectionResponse toResponse(Collection entity);
 
@@ -47,7 +47,7 @@ public interface CollectionMapper {
      */
     @Mapping(target = "collectionId", ignore = true)
     @Mapping(target = "date", ignore = true)
-    @Mapping(target = "person", ignore = true)
+    @Mapping(target = "user", ignore = true)
     @Mapping(target = "books", ignore = true)
     Collection toEntity(CollectionRequest request);
 }

@@ -13,7 +13,7 @@ import lombok.Data;
 public class CommentResponse {
     private long id;
     private String book;
-    private String person;
+    private String user;
     private String body;
     private String date;
 }

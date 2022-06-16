@@ -27,7 +27,7 @@ public interface BookMapper {
      * @return the {@link BookResponse} DTO
      */
     @Mapping(target = "id", source = "bookId")
-    @Mapping(target = "author", source = "person.email")
+    @Mapping(target = "author", source = "user.username")
     @Mapping(target = "genre", source = "genre.name")
     @Mapping(target = "date", dateFormat = DATE_TIME_FORMAT)
     BookResponse toResponse(Book entity);
@@ -47,11 +47,11 @@ public interface BookMapper {
      * @return the {@link Book} entity
      */
     @Mapping(target = "bookId", ignore = true)
-    @Mapping(target = "person", ignore = true)
+    @Mapping(target = "user", ignore = true)
     @Mapping(target = "genre", ignore = true)
     @Mapping(target = "date", ignore = true)
     @Mapping(target = "comments", ignore = true)
     @Mapping(target = "collections", ignore = true)
-    @Mapping(target = "persons", ignore = true)
+    @Mapping(target = "users", ignore = true)
     Book toEntity(BookRequest request);
 }

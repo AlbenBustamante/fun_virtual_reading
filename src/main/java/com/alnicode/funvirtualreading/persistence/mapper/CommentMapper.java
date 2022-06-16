@@ -28,7 +28,7 @@ public interface CommentMapper {
      */
     @Mapping(target = "date", dateFormat = DATE_TIME_FORMAT)
     @Mapping(target = "book", source = "book.title")
-    @Mapping(target = "person", source = "person.email")
+    @Mapping(target = "user", source = "user.username")
     CommentResponse toResponse(Comment entity);
 
     /**
@@ -47,7 +47,7 @@ public interface CommentMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "date", ignore = true)
-    @Mapping(target = "person", ignore = true)
+    @Mapping(target = "user", ignore = true)
     @Mapping(target = "book", ignore = true)
     Comment toEntity(CommentRequest request);
 }

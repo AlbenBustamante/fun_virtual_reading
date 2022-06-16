@@ -15,7 +15,7 @@ import lombok.Data;
 public class CollectionResponse {
     private long id;
     private String name;
-    private String person;
+    private String user;
     private String date;
     private Set<CollectionsBookResponse> books = new HashSet<>();
 }

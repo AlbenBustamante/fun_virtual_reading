@@ -40,6 +40,6 @@ public interface NationalityMapper {
      * @return the {@link Nationality} entity
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "persons", ignore = true)
+    @Mapping(target = "users", ignore = true)
     Nationality toEntity(NationalityRequest request);
 }

@@ -19,5 +19,5 @@ public class CollectionRequest {
 
     @NotNull
     @Min(1L)
-    private long personId;
+    private long userId;
 }

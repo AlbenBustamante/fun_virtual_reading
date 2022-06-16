@@ -59,11 +59,11 @@ public class Collection {
     @NotNull
     @Min(1L)
     @Max(Long.MAX_VALUE)
-    @Column(name = "person_id")
-    private Long personId;
+    @Column(name = "user_id")
+    private Long userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "person_id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
