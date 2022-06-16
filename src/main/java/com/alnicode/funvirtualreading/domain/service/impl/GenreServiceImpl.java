@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
-public class GenreServiceImpl extends DeleteService<Genre> implements IGenreService {
+public class GenreServiceImpl implements IGenreService {
     @Autowired
     private GenreMapper mapper;
 
@@ -60,7 +60,7 @@ public class GenreServiceImpl extends DeleteService<Genre> implements IGenreServ
     }
 
     @Override
-    protected CrudRepository<Genre, Long> repository() {
+    public CrudRepository<Genre, Long> repository() {
         return this.repository;
     }
 

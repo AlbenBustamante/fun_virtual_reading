@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
-public class CollectionServiceImpl extends DeleteService<Collection> implements ICollectionService {
+public class CollectionServiceImpl implements ICollectionService {
     @Autowired
     private CollectionMapper mapper;
 
@@ -51,7 +51,7 @@ public class CollectionServiceImpl extends DeleteService<Collection> implements 
     public Optional<CollectionResponse> update(long id, CollectionRequest request) {
         var collection = this.repository.findById(id);
 
-        if (!collection.isPresent()) {
+        if (collection.isEmpty()) {
             return Optional.empty();
         }
 
@@ -63,7 +63,7 @@ public class CollectionServiceImpl extends DeleteService<Collection> implements 
     }
 
     @Override
-    protected CrudRepository<Collection, Long> repository() {
+    public CrudRepository<Collection, Long> repository() {
         return this.repository;
     }
 

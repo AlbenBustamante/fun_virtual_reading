@@ -21,12 +21,17 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
-public class CommentServiceImpl extends DeleteService<Comment> implements ICommentService {
+public class CommentServiceImpl implements ICommentService {
     @Autowired
     private CommentRepository repository;
 
     @Autowired
     private CommentMapper mapper;
+
+    @Override
+    public CrudRepository<Comment, Long> repository() {
+        return repository;
+    }
 
     @Override
     @Transactional
@@ -51,7 +56,7 @@ public class CommentServiceImpl extends DeleteService<Comment> implements IComme
     public Optional<CommentResponse> update(long id, CommentRequest request) {
         var comment = this.repository.findById(id);
 
-        if (!comment.isPresent()) {
+        if (comment.isEmpty()) {
             return Optional.empty();
         }
 
@@ -62,10 +67,6 @@ public class CommentServiceImpl extends DeleteService<Comment> implements IComme
         return Optional.of(this.mapper.toResponse(this.repository.save(entity)));
     }
 
-    @Override
-    protected CrudRepository<Comment, Long> repository() {
-        return this.repository;
-    }
 
     @Override
     public Optional<List<CommentResponse>> getByPerson(long personId) {

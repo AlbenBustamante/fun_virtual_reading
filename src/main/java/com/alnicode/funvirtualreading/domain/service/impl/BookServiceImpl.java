@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
-public class BookServiceImpl extends DeleteService<Book> implements IBookService {
+public class BookServiceImpl implements IBookService {
     @Autowired
     private BookMapper mapper;
 
@@ -51,7 +51,7 @@ public class BookServiceImpl extends DeleteService<Book> implements IBookService
     public Optional<BookResponse> update(long id, BookRequest request) {
         var book = this.repository.findById(id);
 
-        if (!book.isPresent()) {
+        if (book.isEmpty()) {
             return Optional.empty();
         }
 
@@ -63,7 +63,7 @@ public class BookServiceImpl extends DeleteService<Book> implements IBookService
     }
 
     @Override
-    protected CrudRepository<Book, Long> repository() {
+    public CrudRepository<Book, Long> repository() {
         return this.repository;
     }
 

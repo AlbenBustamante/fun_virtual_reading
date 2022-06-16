@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
-public class NationalityServiceImpl extends DeleteService<Nationality> implements INationalityService {
+public class NationalityServiceImpl implements INationalityService {
     @Autowired
     private NationalityMapper mapper;
 
@@ -49,16 +49,18 @@ public class NationalityServiceImpl extends DeleteService<Nationality> implement
     @Override
     @Transactional
     public Optional<NationalityResponse> update(long id, NationalityRequest request) {
-        if (this.repository.existsById(id)) {
-            var entity = this.mapper.toEntity(request);
-            entity.setId(id);
-            return Optional.of(this.mapper.toResponse(entity));
+        if (!this.repository.existsById(id)) {
+            return Optional.empty();
         }
-        return Optional.empty();
+
+        var entity = this.mapper.toEntity(request);
+        entity.setId(id);
+
+        return Optional.of(this.mapper.toResponse(entity));
     }
 
     @Override
-    protected CrudRepository<Nationality, Long> repository() {
+    public CrudRepository<Nationality, Long> repository() {
         return this.repository;
     }
 

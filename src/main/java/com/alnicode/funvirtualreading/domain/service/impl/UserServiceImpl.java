@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 1.0
  */
 @Service
-public class UserServiceImpl extends DeleteService<User> implements IUserService {
+public class UserServiceImpl implements IUserService {
     @Autowired
     private UserRepository repository;
 
@@ -55,7 +55,7 @@ public class UserServiceImpl extends DeleteService<User> implements IUserService
     public Optional<UserResponse> update(long id, UserRequest request) {
         var person = this.repository.findById(id);
 
-        if (!person.isPresent()) {
+        if (person.isEmpty()) {
             return Optional.empty();
         }
 
@@ -67,7 +67,7 @@ public class UserServiceImpl extends DeleteService<User> implements IUserService
     }
 
     @Override
-    protected CrudRepository<User, Long> repository() {
+    public CrudRepository<User, Long> repository() {
         return this.repository;
     }
 

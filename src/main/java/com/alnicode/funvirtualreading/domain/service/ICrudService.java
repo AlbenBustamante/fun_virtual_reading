@@ -2,6 +2,7 @@ package com.alnicode.funvirtualreading.domain.service;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * This is a generic service template with the CRUD methods.
@@ -11,6 +12,13 @@ import java.util.Optional;
  * @since 1.0
  */
 public interface ICrudService<Request, Response> {
+
+    /**
+     * Set the repository to be used.
+     *
+     * @return the repository used.
+     */
+    CrudRepository<?, Long> repository();
 
     /**
      * Save a new entity by the request.
@@ -50,6 +58,13 @@ public interface ICrudService<Request, Response> {
      * @param id the id to search and be deleted
      * @return true if it was deleted
      */
-    boolean delete(long id);
+    default boolean delete(long id) {
+        try {
+            repository().deleteById(id);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
 
 }
