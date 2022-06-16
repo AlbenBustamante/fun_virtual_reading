@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.persistence.entity;
 
+import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +11,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 
 /**
  * The collections-books entity model.
@@ -25,12 +26,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "collections_books")
 public class CollectionsBook {
     @EmbeddedId
-    @EqualsAndHashCode.Include
     private CollectionsBookPK id;
 
     @NotNull
@@ -49,4 +48,17 @@ public class CollectionsBook {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     private Book book;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        CollectionsBook that = (CollectionsBook) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -2,6 +2,7 @@ package com.alnicode.funvirtualreading.persistence.entity;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,10 +20,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -39,14 +40,12 @@ import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "collections")
 public class Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "collection_id")
-    @EqualsAndHashCode.Include
     private Long collectionId;
 
     @NotNull
@@ -78,5 +77,18 @@ public class Collection {
         if (this.date == null) {
             this.date = LocalDateTime.now();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Collection that = (Collection) o;
+        return collectionId != null && Objects.equals(collectionId, that.collectionId);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
