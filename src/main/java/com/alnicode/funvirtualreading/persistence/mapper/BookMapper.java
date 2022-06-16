@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 
-import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
+import static com.alnicode.funvirtualreading.constants.DateFormatConstants.DATE_TIME_FORMAT;
 
 /**
  * The book mapper.

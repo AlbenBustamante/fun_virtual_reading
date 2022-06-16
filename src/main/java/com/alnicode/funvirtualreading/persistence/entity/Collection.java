@@ -28,7 +28,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
-import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
+import static com.alnicode.funvirtualreading.constants.DateFormatConstants.DATE_TIME_FORMAT;
 
 /**
  * The collection entity model.

@@ -15,7 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
-import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
+import static com.alnicode.funvirtualreading.constants.DateFormatConstants.DATE_TIME_FORMAT;
 
 /**
  * Here is all the exceptions handlers.

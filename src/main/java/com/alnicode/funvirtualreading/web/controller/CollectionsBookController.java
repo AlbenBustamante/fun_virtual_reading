@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import static com.alnicode.funvirtualreading.util.AppConstants.COLLECTIONS_BOOKS_PATH;
+import static com.alnicode.funvirtualreading.constants.DateFormatConstants.COLLECTIONS_BOOKS_PATH;
 
 /**
  * The collections-books rest controller.

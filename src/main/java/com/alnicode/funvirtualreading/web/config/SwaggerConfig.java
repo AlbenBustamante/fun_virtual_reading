@@ -11,7 +11,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
-import static com.alnicode.funvirtualreading.util.AppConstants.CONTROLLERS_PACKAGE;
+import static com.alnicode.funvirtualreading.constants.DateFormatConstants.CONTROLLERS_PACKAGE;
 
 /**
  * Enable and configure Swagger2.

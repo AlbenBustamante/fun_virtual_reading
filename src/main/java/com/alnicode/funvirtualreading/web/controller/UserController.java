@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import static com.alnicode.funvirtualreading.util.AppConstants.LIKES_PATH;
+import static com.alnicode.funvirtualreading.constants.DateFormatConstants.LIKES_PATH;
 
 /**
  * The user rest controller.
