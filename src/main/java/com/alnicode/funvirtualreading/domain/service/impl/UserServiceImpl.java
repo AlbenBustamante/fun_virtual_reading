@@ -3,14 +3,21 @@ package com.alnicode.funvirtualreading.domain.service.impl;
 import com.alnicode.funvirtualreading.domain.dto.UserRequest;
 import com.alnicode.funvirtualreading.domain.dto.UserResponse;
 import com.alnicode.funvirtualreading.domain.service.IUserService;
+import com.alnicode.funvirtualreading.persistence.entity.Role;
 import com.alnicode.funvirtualreading.persistence.entity.User;
 import com.alnicode.funvirtualreading.persistence.mapper.UserMapper;
 import com.alnicode.funvirtualreading.persistence.repository.BookRepository;
 import com.alnicode.funvirtualreading.persistence.repository.UserRepository;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -125,4 +132,23 @@ public class UserServiceImpl implements IUserService {
         return this.repository.findByPublishedBooksBookId(bookId).map(mapper::toResponse);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        final var user = repository.findByUsernameOrEmail(username, username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username or email not found, try again"));
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), toAuthorities(user.getRoles()));
+    }
+
+    /**
+     * Map a roles' collection to {@link GrantedAuthority} collection.
+     *
+     * @param roles the collection to be mapped.
+     * @return the collection mapped.
+     */
+    private Collection<GrantedAuthority> toAuthorities(Collection<Role> roles) {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toSet());
+    }
 }

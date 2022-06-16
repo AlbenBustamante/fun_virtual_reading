@@ -4,6 +4,7 @@ import com.alnicode.funvirtualreading.domain.dto.UserRequest;
 import com.alnicode.funvirtualreading.domain.dto.UserResponse;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * The user service template.
@@ -12,7 +13,7 @@ import java.util.Optional;
  * @version 1.0
  * @since 1.0
  */
-public interface IUserService extends ICrudService<UserRequest, UserResponse> {
+public interface IUserService extends ICrudService<UserRequest, UserResponse>, UserDetailsService {
 
     /**
      * Add a book to the likes collection.
