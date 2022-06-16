@@ -69,8 +69,8 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<CommentResponse>> getByPerson(long personId) {
-        return this.repository.findByPersonId(personId).map(mapper::toResponses);
+    public Optional<List<CommentResponse>> getByUser(long userId) {
+        return this.repository.findByUserId(userId).map(mapper::toResponses);
     }
 
     @Override

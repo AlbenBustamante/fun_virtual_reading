@@ -78,8 +78,8 @@ public class NationalityServiceImpl implements INationalityService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<NationalityResponse> getByAuthorId(long personId) {
-        return this.repository.findByPersonsId(personId).map(mapper::toResponse);
+    public Optional<NationalityResponse> getByAuthorId(long userId) {
+        return this.repository.findByUsersId(userId).map(mapper::toResponse);
     }
 
 }

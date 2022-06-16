@@ -32,9 +32,9 @@ public interface INationalityService extends ICrudService<NationalityRequest, Na
     /**
      * Get a nationality response by the person id.
      *
-     * @param personId the id to search
+     * @param userId the id to search
      * @return the {@link NationalityResponse} found
      */
-    Optional<NationalityResponse> getByAuthorId(long personId);
+    Optional<NationalityResponse> getByAuthorId(long userId);
 
 }

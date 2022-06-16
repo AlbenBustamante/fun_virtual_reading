@@ -69,8 +69,8 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<List<BookResponse>> getByAuthorId(long personId) {
-        return this.repository.findByPersonId(personId).map(mapper::toResponses);
+    public Optional<List<BookResponse>> getByAuthorId(long userId) {
+        return this.repository.findByUserId(userId).map(mapper::toResponses);
     }
 
     @Override

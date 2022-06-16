@@ -19,10 +19,10 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     /**
      * Find the comments with the same person id.
      *
-     * @param personId the id to search
+     * @param userId the id to search
      * @return a comments list
      */
-    Optional<List<Comment>> findByPersonId(long personId);
+    Optional<List<Comment>> findByUserId(long userId);
 
     /**
      * Find the comments with the same book id.

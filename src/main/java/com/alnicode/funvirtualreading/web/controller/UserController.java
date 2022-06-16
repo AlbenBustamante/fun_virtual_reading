@@ -97,29 +97,29 @@ public class UserController extends CrudController<UserRequest, UserResponse> {
     /**
      * Add a book to the person's likes list
      *
-     * @param personId the person id to add
+     * @param userId the user id to add
      * @param bookId   the book id to add
      * @return a {@link ResponseEntity} with the person response found
      */
     @PostMapping(LIKES_PATH)
     public ResponseEntity<UserResponse> addLike(
-            @Min(1L) @PathVariable("id") long personId,
+            @Min(1L) @PathVariable("id") long userId,
             @Min(1L) @PathVariable("bookId") long bookId) {
-        return ResponseEntity.of(this.service.addLike(personId, bookId));
+        return ResponseEntity.of(this.service.addLike(userId, bookId));
     }
 
     /**
      * Remove a book to the person's likes list
      *
-     * @param personId the person id to remove
+     * @param userId the user id to remove
      * @param bookId   the book id to remove
      * @return a {@link ResponseEntity} with the person response found
      */
     @DeleteMapping(LIKES_PATH)
     public ResponseEntity<UserResponse> removeLike(
-            @Min(1L) @PathVariable("id") long personId,
+            @Min(1L) @PathVariable("id") long userId,
             @Min(1L) @PathVariable("bookId") long bookId) {
-        return ResponseEntity.of(this.service.removeLike(personId, bookId));
+        return ResponseEntity.of(this.service.removeLike(userId, bookId));
     }
 
 }

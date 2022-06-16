@@ -25,10 +25,10 @@ public interface IBookService extends ICrudService<BookRequest, BookResponse> {
     /**
      * Get the book responses with the same person id.
      *
-     * @param personId the id to search
+     * @param userId the id to search
      * @return a list with the responses found
      */
-    Optional<List<BookResponse>> getByAuthorId(long personId);
+    Optional<List<BookResponse>> getByAuthorId(long userId);
 
     /**
      * Get the book responses with the same genre id.

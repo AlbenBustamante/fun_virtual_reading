@@ -17,10 +17,10 @@ public interface ICommentService extends ICrudService<CommentRequest, CommentRes
     /**
      * Get a comment responses list with the same person id.
      *
-     * @param personId the id to search
+     * @param userId the id to search
      * @return the responses list
      */
-    Optional<List<CommentResponse>> getByPerson(long personId);
+    Optional<List<CommentResponse>> getByUser(long userId);
 
     /**
      * Get a comment responses list with the same book id.

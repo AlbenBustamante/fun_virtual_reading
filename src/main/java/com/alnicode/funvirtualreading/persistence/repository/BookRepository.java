@@ -19,10 +19,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     /**
      * Find the books with the same person id.
      *
-     * @param personId the id to search
+     * @param userId the id to search
      * @return a books list
      */
-    Optional<List<Book>> findByPersonId(long personId);
+    Optional<List<Book>> findByUserId(long userId);
 
     /**
      * Find the books with the same genre id.

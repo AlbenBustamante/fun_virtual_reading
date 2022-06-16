@@ -74,15 +74,15 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public Optional<UserResponse> update(long id, UserRequest request) {
-        var person = this.repository.findById(id);
+        var user = this.repository.findById(id);
 
-        if (person.isEmpty()) {
+        if (user.isEmpty()) {
             return Optional.empty();
         }
 
         var entity = this.mapper.toEntity(request);
         entity.setId(id);
-        entity.setDate(person.get().getDate());
+        entity.setDate(user.get().getDate());
 
         return Optional.of(this.mapper.toResponse(this.repository.save(entity)));
     }
@@ -94,32 +94,32 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional
-    public Optional<UserResponse> addLike(long personId, long bookId) {
-        var person = this.repository.findById(personId);
+    public Optional<UserResponse> addLike(long userId, long bookId) {
+        var user = this.repository.findById(userId);
         var book = this.bookRepository.findById(bookId);
 
-        if (!(person.isPresent() && book.isPresent())) {
+        if (!(user.isPresent() && book.isPresent())) {
             return Optional.empty();
         }
 
-        person.get().addLike(book.get());
+        user.get().addLike(book.get());
 
-        return Optional.of(this.mapper.toResponse(this.repository.save(person.get())));
+        return Optional.of(this.mapper.toResponse(this.repository.save(user.get())));
     }
 
     @Override
     @Transactional
-    public Optional<UserResponse> removeLike(long personId, long bookId) {
-        var person = this.repository.findById(personId);
+    public Optional<UserResponse> removeLike(long userId, long bookId) {
+        var user = this.repository.findById(userId);
         var book = this.bookRepository.findById(bookId);
 
-        if (!(person.isPresent() && book.isPresent())) {
+        if (!(user.isPresent() && book.isPresent())) {
             return Optional.empty();
         }
 
-        person.get().removeLike(book.get());
+        user.get().removeLike(book.get());
 
-        return Optional.of(this.mapper.toResponse(this.repository.save(person.get())));
+        return Optional.of(this.mapper.toResponse(this.repository.save(user.get())));
     }
 
     @Override

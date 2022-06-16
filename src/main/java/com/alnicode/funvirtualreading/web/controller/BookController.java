@@ -35,7 +35,7 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
     private IBookService service;
 
     @Autowired
-    private IUserService personService;
+    private IUserService userService;
 
     @Autowired
     private IGenreService genreService;
@@ -49,14 +49,14 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
     }
 
     /**
-     * Get a list of people who liked a book by the id.
+     * Get a list of users who liked a book by the id.
      *
      * @param bookId the id to search
      * @return a {@link ResponseEntity} with the persons list
      */
     @GetMapping("{id}/likedBy")
-    public ResponseEntity<List<UserResponse>> getPersonsWhoLikedIt(@Min(1L) @PathVariable("id") long bookId) {
-        return ResponseEntity.of(this.personService.getByBooksLiked(bookId));
+    public ResponseEntity<List<UserResponse>> getUsersWhoLikedIt(@Min(1L) @PathVariable("id") long bookId) {
+        return ResponseEntity.of(this.userService.getByBooksLiked(bookId));
     }
 
     /**
@@ -67,7 +67,7 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
      */
     @GetMapping("/{id}/author")
     public ResponseEntity<UserResponse> getAuthor(@Min(1L) @PathVariable("id") long bookId) {
-        return ResponseEntity.of(this.personService.getByPublishedBook(bookId));
+        return ResponseEntity.of(this.userService.getByPublishedBook(bookId));
     }
 
     /**

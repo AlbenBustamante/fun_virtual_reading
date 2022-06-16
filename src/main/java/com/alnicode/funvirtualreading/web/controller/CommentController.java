@@ -52,12 +52,12 @@ public class CommentController extends CrudController<CommentRequest, CommentRes
     /**
      * Get all the person's comments.
      *
-     * @param personId the id to search
+     * @param userId the id to search
      * @return a {@link ResponseEntity} with the comments list
      */
-    @GetMapping("/person/{id}")
-    public ResponseEntity<List<CommentResponse>> getAllByPerson(@Min(1L) @PathVariable("id") long personId) {
-        return ResponseEntity.of(this.service.getByPerson(personId));
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<CommentResponse>> getAllByUser(@Min(1L) @PathVariable("id") long userId) {
+        return ResponseEntity.of(this.service.getByUser(userId));
     }
 
 }
