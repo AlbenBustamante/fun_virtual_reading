@@ -7,9 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import lombok.Data;
 
+/**
+ * The user entity.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Data
 @Entity
 @Table(name = "users")
@@ -25,7 +31,7 @@ public class User {
 
     @NotNull
     private String password;
-    
+
     @NotNull
     @Column(name = "role_name")
     private String role;

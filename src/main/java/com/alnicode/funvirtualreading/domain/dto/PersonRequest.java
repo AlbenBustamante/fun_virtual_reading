@@ -4,9 +4,15 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import lombok.Data;
 
+/**
+ * The person request DTO.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Data
 public class PersonRequest {
     @NotBlank

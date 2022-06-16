@@ -3,7 +3,6 @@ package com.alnicode.funvirtualreading.persistence.entity;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,17 +20,23 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 
 import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
 
+/**
+ * The book entity model.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @NoArgsConstructor
 @Getter
 @Setter
@@ -51,7 +56,7 @@ public class Book {
 
     @NotNull
     @Size(min = 100, max = 600)
-    private String sypnosis;
+    private String synopsis;
 
     @NotNull
     @Size(min = 1000, max = 4000)
@@ -81,17 +86,20 @@ public class Book {
     @Column(name = "publication_date")
     private LocalDateTime date;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<Comment> comments = Collections.emptySet();
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<CollectionsBook> collections = Collections.emptySet();
 
     @ManyToMany(
-        mappedBy = "likes", fetch = FetchType.LAZY, 
-        cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+            mappedBy = "likes", fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Person> persons = Collections.emptySet();
 
+    /**
+     * Set the publication date before being registered.
+     */
     @PrePersist
     public void setPublicationDate() {
         if (this.date == null) {

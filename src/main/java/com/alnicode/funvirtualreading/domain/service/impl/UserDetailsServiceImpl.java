@@ -1,10 +1,8 @@
 package com.alnicode.funvirtualreading.domain.service.impl;
 
+import com.alnicode.funvirtualreading.persistence.repository.UserRepository;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.alnicode.funvirtualreading.persistence.repository.UserRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,5 +25,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return new User(user.getUsername(), user.getPassword(), authorities);
     }
-    
+
 }

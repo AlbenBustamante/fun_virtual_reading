@@ -1,7 +1,6 @@
 package com.alnicode.funvirtualreading.persistence.entity;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,17 +15,23 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 
 import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
 
+/**
+ * The comment entity model.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @NoArgsConstructor
 @Getter
 @Setter
@@ -68,6 +73,9 @@ public class Comment {
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     private Book book;
 
+    /**
+     * Set the publication date before being registered.
+     */
     @PrePersist
     public void setPublicationDate() {
         if (this.date == null) {

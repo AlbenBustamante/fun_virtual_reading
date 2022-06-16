@@ -1,19 +1,24 @@
 package com.alnicode.funvirtualreading.domain.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookRequest;
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookResponse;
 import com.alnicode.funvirtualreading.domain.service.ICollectionsBookService;
 import com.alnicode.funvirtualreading.persistence.entity.CollectionsBookPK;
 import com.alnicode.funvirtualreading.persistence.mapper.CollectionsBookMapper;
 import com.alnicode.funvirtualreading.persistence.repository.CollectionsBookRepository;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * The collections-books service implementation.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class CollectionsBookServiceImpl implements ICollectionsBookService {
     @Autowired
@@ -27,7 +32,7 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
     public CollectionsBookResponse save(long collectionId, long bookId, CollectionsBookRequest request) {
         var entity = this.mapper.toEntity(request);
         entity.setId(this.toPK(collectionId, bookId));
-        
+
         return this.mapper.toResponse(this.repository.save(entity));
     }
 
@@ -47,7 +52,7 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
     @Transactional
     public Optional<CollectionsBookResponse> update(long collectionId, long bookId, CollectionsBookRequest request) {
         var id = this.toPK(collectionId, bookId);
-        
+
         if (!this.repository.existsById(id)) {
             return Optional.empty();
         }
@@ -80,5 +85,5 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
     public List<CollectionsBookResponse> getAllOrderByRating() {
         return this.mapper.toResponses(this.repository.findAllByOrderByRatingAsc());
     }
-    
+
 }

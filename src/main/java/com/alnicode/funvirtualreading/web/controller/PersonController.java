@@ -1,13 +1,5 @@
 package com.alnicode.funvirtualreading.web.controller;
 
-import static com.alnicode.funvirtualreading.util.AppConstants.LIKES_PATH;
-
-import java.util.List;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-
 import com.alnicode.funvirtualreading.domain.dto.BookResponse;
 import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
 import com.alnicode.funvirtualreading.domain.dto.PersonRequest;
@@ -16,7 +8,10 @@ import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
 import com.alnicode.funvirtualreading.domain.service.INationalityService;
 import com.alnicode.funvirtualreading.domain.service.IPersonService;
-
+import java.util.List;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +22,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import static com.alnicode.funvirtualreading.util.AppConstants.LIKES_PATH;
+
+/**
+ * The person rest controller.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Validated
 @RestController
 @RequestMapping("/persons")
@@ -45,26 +50,57 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
         return this.service;
     }
 
+    /**
+     * Get all the books published by the same person id.
+     *
+     * @param personId the id to search
+     * @return a {@link ResponseEntity} with the books list
+     */
     @GetMapping("/{id}/books")
     public ResponseEntity<List<BookResponse>> getAllPublishedBooks(@Min(1L) @PathVariable("id") long personId) {
         return ResponseEntity.of(this.bookService.getByAuthorId(personId));
     }
 
+    /**
+     * Get the person's nationality.
+     *
+     * @param personId the id to search
+     * @return a {@link ResponseEntity} with the nationality found
+     */
     @GetMapping("/{id}/nationality")
     public ResponseEntity<NationalityResponse> getNationality(@Min(1L) @PathVariable("id") long personId) {
         return ResponseEntity.of(this.nationalityService.getByAuthorId(personId));
     }
 
+    /**
+     * Get a person response by the email.
+     *
+     * @param email the email to search
+     * @return a {@link ResponseEntity} with the response found
+     */
     @GetMapping("/email/{email}")
     public ResponseEntity<PersonResponse> getByEmail(@NotBlank @Email @PathVariable("email") String email) {
         return ResponseEntity.of(this.service.getByEmail(email));
     }
 
-    @GetMapping("nationality/{id}")
+    /**
+     * Get all the persons with the same nationality id.
+     *
+     * @param nationalityId the id to search
+     * @return a {@link ResponseEntity} with the persons list
+     */
+    @GetMapping("/nationality/{id}")
     public ResponseEntity<List<PersonResponse>> getAllByNationality(@Min(1L) @PathVariable("id") long nationalityId) {
         return ResponseEntity.of(this.service.getByNationality(nationalityId));
     }
 
+    /**
+     * Add a book to the person's likes list
+     *
+     * @param personId the person id to add
+     * @param bookId   the book id to add
+     * @return a {@link ResponseEntity} with the person response found
+     */
     @PostMapping(LIKES_PATH)
     public ResponseEntity<PersonResponse> addLike(
             @Min(1L) @PathVariable("id") long personId,
@@ -72,11 +108,18 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
         return ResponseEntity.of(this.service.addLike(personId, bookId));
     }
 
+    /**
+     * Remove a book to the person's likes list
+     *
+     * @param personId the person id to remove
+     * @param bookId   the book id to remove
+     * @return a {@link ResponseEntity} with the person response found
+     */
     @DeleteMapping(LIKES_PATH)
     public ResponseEntity<PersonResponse> removeLike(
             @Min(1L) @PathVariable("id") long personId,
             @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(this.service.removeLike(personId, bookId));
     }
-    
+
 }

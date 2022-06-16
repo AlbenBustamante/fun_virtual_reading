@@ -1,21 +1,46 @@
 package com.alnicode.funvirtualreading.persistence.mapper;
 
-import java.util.List;
-
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookRequest;
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookResponse;
 import com.alnicode.funvirtualreading.persistence.entity.CollectionsBook;
-
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+/**
+ * The collections-books mapper.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Mapper(componentModel = "spring")
 public interface CollectionsBookMapper {
+
+    /**
+     * Map a collections-books entity to the collections-books response DTO.
+     *
+     * @param entity the {@link CollectionsBook} entity to be mapped
+     * @return the {@link CollectionsBookResponse} DTO
+     */
     @Mapping(target = "collection", source = "collection.name")
     @Mapping(target = "book", source = "book.title")
     CollectionsBookResponse toResponse(CollectionsBook entity);
+
+    /**
+     * Map an entities list to the responses list.
+     *
+     * @param entities the list to be mapped
+     * @return the responses list
+     */
     List<CollectionsBookResponse> toResponses(List<CollectionsBook> entities);
 
+    /**
+     * Map a collections-books request DTO to the collections-books entity.
+     *
+     * @param request the {@link CollectionsBookRequest} DTO to be mapped
+     * @return the {@link CollectionsBook} entity
+     */
     @Mapping(target = "id.collectionId", ignore = true)
     @Mapping(target = "id.bookId", ignore = true)
     @Mapping(target = "collection", ignore = true)

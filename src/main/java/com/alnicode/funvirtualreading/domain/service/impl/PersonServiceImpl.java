@@ -1,8 +1,5 @@
 package com.alnicode.funvirtualreading.domain.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.alnicode.funvirtualreading.domain.dto.PersonRequest;
 import com.alnicode.funvirtualreading.domain.dto.PersonResponse;
 import com.alnicode.funvirtualreading.domain.service.IPersonService;
@@ -10,7 +7,8 @@ import com.alnicode.funvirtualreading.persistence.entity.Person;
 import com.alnicode.funvirtualreading.persistence.mapper.PersonMapper;
 import com.alnicode.funvirtualreading.persistence.repository.BookRepository;
 import com.alnicode.funvirtualreading.persistence.repository.PersonRepository;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -57,7 +55,7 @@ public class PersonServiceImpl extends DeleteService<Person> implements IPersonS
         var entity = this.mapper.toEntity(request);
         entity.setId(id);
         entity.setDate(person.get().getDate());
-        
+
         return Optional.of(this.mapper.toResponse(this.repository.save(entity)));
     }
 
@@ -66,20 +64,20 @@ public class PersonServiceImpl extends DeleteService<Person> implements IPersonS
         return this.repository;
     }
 
-	@Override
+    @Override
     @Transactional
-	public Optional<PersonResponse> addLike(long personId, long bookId) {
-		var person = this.repository.findById(personId);
+    public Optional<PersonResponse> addLike(long personId, long bookId) {
+        var person = this.repository.findById(personId);
         var book = this.bookRepository.findById(bookId);
 
         if (!(person.isPresent() && book.isPresent())) {
             return Optional.empty();
         }
 
-        person.get().addBook(book.get());
+        person.get().addLike(book.get());
 
         return Optional.of(this.mapper.toResponse(this.repository.save(person.get())));
-	}
+    }
 
     @Override
     @Transactional
@@ -91,7 +89,7 @@ public class PersonServiceImpl extends DeleteService<Person> implements IPersonS
             return Optional.empty();
         }
 
-        person.get().removeBook(book.get());
+        person.get().removeLike(book.get());
 
         return Optional.of(this.mapper.toResponse(this.repository.save(person.get())));
     }
@@ -115,5 +113,5 @@ public class PersonServiceImpl extends DeleteService<Person> implements IPersonS
     public Optional<PersonResponse> getByPublishedBook(long bookId) {
         return this.repository.findByPublishedBooksBookId(bookId).map(mapper::toResponse);
     }
-    
+
 }

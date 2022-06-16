@@ -1,20 +1,25 @@
 package com.alnicode.funvirtualreading.domain.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.alnicode.funvirtualreading.domain.dto.NationalityRequest;
 import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
 import com.alnicode.funvirtualreading.domain.service.INationalityService;
 import com.alnicode.funvirtualreading.persistence.entity.Nationality;
 import com.alnicode.funvirtualreading.persistence.mapper.NationalityMapper;
 import com.alnicode.funvirtualreading.persistence.repository.NationalityRepository;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * The nationality service implementation.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class NationalityServiceImpl extends DeleteService<Nationality> implements INationalityService {
     @Autowired
@@ -71,5 +76,5 @@ public class NationalityServiceImpl extends DeleteService<Nationality> implement
     public Optional<NationalityResponse> getByAuthorId(long personId) {
         return this.repository.findByPersonsId(personId).map(mapper::toResponse);
     }
-    
+
 }

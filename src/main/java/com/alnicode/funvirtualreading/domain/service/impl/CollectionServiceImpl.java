@@ -1,20 +1,25 @@
 package com.alnicode.funvirtualreading.domain.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.alnicode.funvirtualreading.domain.dto.CollectionRequest;
 import com.alnicode.funvirtualreading.domain.dto.CollectionResponse;
 import com.alnicode.funvirtualreading.domain.service.ICollectionService;
 import com.alnicode.funvirtualreading.persistence.entity.Collection;
 import com.alnicode.funvirtualreading.persistence.mapper.CollectionMapper;
 import com.alnicode.funvirtualreading.persistence.repository.CollectionRepository;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * The collection service implementation.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class CollectionServiceImpl extends DeleteService<Collection> implements ICollectionService {
     @Autowired
@@ -61,5 +66,5 @@ public class CollectionServiceImpl extends DeleteService<Collection> implements 
     protected CrudRepository<Collection, Long> repository() {
         return this.repository;
     }
-    
+
 }

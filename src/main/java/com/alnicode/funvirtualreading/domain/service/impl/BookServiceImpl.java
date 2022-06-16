@@ -1,27 +1,32 @@
 package com.alnicode.funvirtualreading.domain.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.alnicode.funvirtualreading.domain.dto.BookRequest;
 import com.alnicode.funvirtualreading.domain.dto.BookResponse;
 import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.persistence.entity.Book;
 import com.alnicode.funvirtualreading.persistence.mapper.BookMapper;
 import com.alnicode.funvirtualreading.persistence.repository.BookRepository;
-
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * The book service implementation.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class BookServiceImpl extends DeleteService<Book> implements IBookService {
     @Autowired
     private BookMapper mapper;
 
     @Autowired
-    private BookRepository repository; 
+    private BookRepository repository;
 
     @Override
     @Transactional
@@ -76,5 +81,5 @@ public class BookServiceImpl extends DeleteService<Book> implements IBookService
     public Optional<BookResponse> getByComment(long commentId) {
         return this.repository.findByCommentsId(commentId).map(mapper::toResponse);
     }
-    
+
 }

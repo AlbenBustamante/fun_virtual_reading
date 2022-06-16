@@ -4,11 +4,17 @@ import com.alnicode.funvirtualreading.domain.dto.GenreRequest;
 import com.alnicode.funvirtualreading.domain.dto.GenreResponse;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
 import com.alnicode.funvirtualreading.domain.service.IGenreService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * The genre rest controller.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/genres")
 public class GenreController extends CrudController<GenreRequest, GenreResponse> {
