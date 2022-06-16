@@ -50,15 +50,15 @@ import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "person_id")
+    @Column(name = "user_id")
     private Long id;
 
     @Size(min = 3, max = 40)
-    @NotNull
+    @Column(name = "first_name", nullable = false)
     private String name;
 
     @Size(min = 3, max = 60)
-    @NotNull
+    @Column(name = "last_name", nullable = false)
     private String lastname;
 
     @Size(min = 12, max = 200)
@@ -96,9 +96,16 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "persons_books",
-            joinColumns = @JoinColumn(name = "person_id"),
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> likes = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     /**
      * Set the registration date before being registered.
@@ -128,6 +135,26 @@ public class User {
     public void removeLike(Book book) {
         this.likes.remove(book);
         book.getUsers().remove(this);
+    }
+
+    /**
+     * Add a role to the user.
+     *
+     * @param role the role to be added.
+     */
+    public void addRole(Role role) {
+        roles.add(role);
+        role.getUsers().add(this);
+    }
+
+    /**
+     * Remove a role to the user.
+     *
+     * @param role the role to be removed.
+     */
+    public void removeRole(Role role) {
+        roles.remove(role);
+        role.getUsers().remove(this);
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.alnicode.funvirtualreading.persistence.entity;
 
 import com.alnicode.funvirtualreading.enums.RoleType;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +34,9 @@ public class Role {
 
     @Column(nullable = false, unique = true, length = 20)
     private String name;
+
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
 
     /**
      * Create a role by the {@link RoleType} enum.
