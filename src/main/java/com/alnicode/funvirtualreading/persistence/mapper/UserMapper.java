@@ -12,7 +12,7 @@ import static com.alnicode.funvirtualreading.util.AppConstants.DATE_FORMAT;
 import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
 
 /**
- * The person mapper.
+ * The user mapper.
  *
  * @author Alben Bustamante
  * @version 1.0

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * The person model repository.
+ * The user model repository.
  *
  * @author Alben Bustamante
  * @version 1.0

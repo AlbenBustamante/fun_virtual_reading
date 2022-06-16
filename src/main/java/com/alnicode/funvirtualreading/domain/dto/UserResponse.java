@@ -5,7 +5,7 @@ import java.util.Set;
 import lombok.Data;
 
 /**
- * The person response DTO.
+ * The user response DTO.
  *
  * @author Alben Bustamante
  * @version 1.0

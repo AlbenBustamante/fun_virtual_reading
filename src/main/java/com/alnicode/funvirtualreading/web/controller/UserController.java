@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.alnicode.funvirtualreading.util.AppConstants.LIKES_PATH;
 
 /**
- * The person rest controller.
+ * The user rest controller.
  *
  * @author Alben Bustamante
  * @version 1.0

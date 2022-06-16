@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
- * The person request DTO.
+ * The user request DTO.
  *
  * @author Alben Bustamante
  * @version 1.0

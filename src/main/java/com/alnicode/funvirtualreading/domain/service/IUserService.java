@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * The person service template.
+ * The user service template.
  *
  * @author Alben Bustamante
  * @version 1.0

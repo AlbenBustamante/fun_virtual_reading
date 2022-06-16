@@ -14,6 +14,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * The user service implementation.
+ *
+ * @author Alben Bustamante
+ * @version 1.0
+ * @since 1.0
+ */
 @Service
 public class UserServiceImpl extends DeleteService<User> implements IUserService {
     @Autowired

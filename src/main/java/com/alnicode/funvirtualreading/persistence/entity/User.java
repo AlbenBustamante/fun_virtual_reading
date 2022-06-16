@@ -36,7 +36,7 @@ import static com.alnicode.funvirtualreading.util.AppConstants.DATE_FORMAT;
 import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
 
 /**
- * The person entity model.
+ * The user entity model.
  *
  * @author Alben Bustamante
  * @version 1.0
