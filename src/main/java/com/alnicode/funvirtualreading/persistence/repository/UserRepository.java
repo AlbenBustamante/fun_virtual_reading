@@ -17,7 +17,24 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
-     * Find a person by the email.
+     * Find a user by the username or the email
+     *
+     * @param username the username to search
+     * @param email the email to search
+     * @return an {@code Optional} of the user found
+     */
+    Optional<User> findByUsernameOrEmail(String username, String email);
+
+    /**
+     * Find a user by the username
+     *
+     * @param username the username to search
+     * @return an {@code Optional} of the user found
+     */
+    Optional<User> findByUsername(String username);
+
+    /**
+     * Find a user by the email.
      *
      * @param email the email to search
      * @return the person found
@@ -25,7 +42,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     /**
-     * Find a person by the published book id.
+     * Find an user by the published book id.
      *
      * @param bookId the id to search
      * @return the person found.
@@ -33,7 +50,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByPublishedBooksBookId(long bookId);
 
     /**
-     * Find the persons with the same nationality id.
+     * Find the users with the same nationality id.
      *
      * @param nationalityId the id to search.
      * @return the persons list
@@ -41,7 +58,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<List<User>> findByNationalityId(long nationalityId);
 
     /**
-     * Find the persons with the same book liked.
+     * Find the users with the same book liked.
      *
      * @param bookId the book id to search
      * @return the persons list
