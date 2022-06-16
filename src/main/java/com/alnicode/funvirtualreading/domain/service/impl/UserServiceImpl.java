@@ -3,10 +3,12 @@ package com.alnicode.funvirtualreading.domain.service.impl;
 import com.alnicode.funvirtualreading.domain.dto.UserRequest;
 import com.alnicode.funvirtualreading.domain.dto.UserResponse;
 import com.alnicode.funvirtualreading.domain.service.IUserService;
+import com.alnicode.funvirtualreading.enums.RoleType;
 import com.alnicode.funvirtualreading.persistence.entity.Role;
 import com.alnicode.funvirtualreading.persistence.entity.User;
 import com.alnicode.funvirtualreading.persistence.mapper.UserMapper;
 import com.alnicode.funvirtualreading.persistence.repository.BookRepository;
+import com.alnicode.funvirtualreading.persistence.repository.RoleRepository;
 import com.alnicode.funvirtualreading.persistence.repository.UserRepository;
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +20,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,10 +42,21 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Override
     @Transactional
     public UserResponse save(UserRequest request) {
-        return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
+        final var entity = mapper.toEntity(request);
+
+        entity.setPassword(encoder.encode(request.getPassword()));
+        entity.addRole(getRole());
+
+        return mapper.toResponse(repository.save(entity));
     }
 
     @Override
@@ -150,5 +164,16 @@ public class UserServiceImpl implements IUserService {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Get an existing user role or create and get a new user role.
+     *
+     * @return the role found
+     */
+    private Role getRole() {
+        final var role = roleRepository.findByName(RoleType.ROLE_USER.getName());
+
+        return role.orElseGet(() -> new Role(RoleType.ROLE_USER));
     }
 }
