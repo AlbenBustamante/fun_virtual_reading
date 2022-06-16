@@ -19,7 +19,7 @@ import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
  * @since 1.0
  */
 @Mapper(componentModel = "spring", uses = {LikeMapper.class})
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<UserResponse, User> {
 
     /**
      * Map a person entity to the person response DTO.
@@ -31,14 +31,6 @@ public interface UserMapper {
     @Mapping(target = "date", dateFormat = DATE_TIME_FORMAT)
     @Mapping(target = "nationality", source = "nationality.name")
     UserResponse toResponse(User entity);
-
-    /**
-     * Map an entities list to the responses list.
-     *
-     * @param entities the list to be mapped
-     * @return the responses list
-     */
-    List<UserResponse> toResponses(List<User> entities);
 
     /**
      * Map a person request DTO to the person entity.
