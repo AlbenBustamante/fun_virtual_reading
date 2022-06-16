@@ -26,9 +26,27 @@ public class UserRequest {
     private String email;
 
     @NotBlank
+    private String username;
+
+    @NotBlank
+    private String password;
+
+    @NotBlank
+    private String rpassword;
+
+    @NotBlank
     private String birthday;
 
     @NotNull
     @Min(1L)
     private long nationalityId;
+
+    /**
+     * Check if the passwords do match.
+     *
+     * @return true if the passwords do match.
+     */
+    public boolean passwordsMatch() {
+        return password.equals(rpassword);
+    }
 }

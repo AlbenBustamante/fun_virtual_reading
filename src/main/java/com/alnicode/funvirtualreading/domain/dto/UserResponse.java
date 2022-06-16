@@ -14,11 +14,6 @@ import lombok.Data;
 @Data
 public class UserResponse {
     private long id;
-    private String firstname;
-    private String lastname;
-    private String email;
-    private String birthday;
-    private String nationality;
-    private String date;
+    private String firstname, lastname, email, username, birthday, nationality, date;
     private Set<LikeResponse> likes = new HashSet<>();
 }

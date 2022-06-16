@@ -66,6 +66,13 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @Size(min = 3, max = 60)
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
+
     @DateTimeFormat(iso = ISO.DATE, pattern = DATE_FORMAT)
     @NotNull
     private LocalDate birthday;

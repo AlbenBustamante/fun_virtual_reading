@@ -54,5 +54,6 @@ public interface UserMapper {
     @Mapping(target = "publishedComments", ignore = true)
     @Mapping(target = "collections", ignore = true)
     @Mapping(target = "likes", ignore = true)
+    @Mapping(target = "roles", ignore = true)
     User toEntity(UserRequest request);
 }
