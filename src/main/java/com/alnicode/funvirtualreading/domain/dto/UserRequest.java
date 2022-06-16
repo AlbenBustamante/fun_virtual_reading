@@ -16,7 +16,7 @@ import lombok.Data;
 @Data
 public class UserRequest {
     @NotBlank
-    private String name;
+    private String firstname;
 
     @NotBlank
     private String lastname;

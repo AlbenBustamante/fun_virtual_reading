@@ -55,7 +55,7 @@ public class User {
 
     @Size(min = 3, max = 40)
     @Column(name = "first_name", nullable = false)
-    private String name;
+    private String firstname;
 
     @Size(min = 3, max = 60)
     @Column(name = "last_name", nullable = false)

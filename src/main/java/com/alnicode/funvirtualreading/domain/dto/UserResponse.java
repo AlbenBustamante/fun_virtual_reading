@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 public class UserResponse {
     private long id;
-    private String name;
+    private String firstname;
     private String lastname;
     private String email;
     private String birthday;
