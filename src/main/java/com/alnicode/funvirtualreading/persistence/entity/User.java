@@ -47,7 +47,7 @@ import static com.alnicode.funvirtualreading.util.AppConstants.DATE_TIME_FORMAT;
 @Setter
 @Entity
 @Table(name = "persons")
-public class Person {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "person_id")
@@ -84,13 +84,13 @@ public class Person {
     @Column(name = "registration_date")
     private LocalDateTime date;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<Book> publishedBooks = Collections.emptySet();
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<Comment> publishedComments = Collections.emptySet();
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<Collection> collections = Collections.emptySet();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -117,7 +117,7 @@ public class Person {
      */
     public void addLike(Book book) {
         this.likes.add(book);
-        book.getPersons().add(this);
+        book.getUsers().add(this);
     }
 
     /**
@@ -127,15 +127,15 @@ public class Person {
      */
     public void removeLike(Book book) {
         this.likes.remove(book);
-        book.getPersons().remove(this);
+        book.getUsers().remove(this);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Person person = (Person) o;
-        return id != null && Objects.equals(id, person.id);
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
     }
 
     @Override

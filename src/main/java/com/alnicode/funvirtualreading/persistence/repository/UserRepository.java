@@ -1,6 +1,6 @@
 package com.alnicode.funvirtualreading.persistence.repository;
 
-import com.alnicode.funvirtualreading.persistence.entity.Person;
+import com.alnicode.funvirtualreading.persistence.entity.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @since 1.0
  */
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
      * Find a person by the email.
@@ -22,7 +22,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
      * @param email the email to search
      * @return the person found
      */
-    Optional<Person> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     /**
      * Find a person by the published book id.
@@ -30,7 +30,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
      * @param bookId the id to search
      * @return the person found.
      */
-    Optional<Person> findByPublishedBooksBookId(long bookId);
+    Optional<User> findByPublishedBooksBookId(long bookId);
 
     /**
      * Find the persons with the same nationality id.
@@ -38,7 +38,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
      * @param nationalityId the id to search.
      * @return the persons list
      */
-    Optional<List<Person>> findByNationalityId(long nationalityId);
+    Optional<List<User>> findByNationalityId(long nationalityId);
 
     /**
      * Find the persons with the same book liked.
@@ -46,6 +46,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
      * @param bookId the book id to search
      * @return the persons list
      */
-    Optional<List<Person>> findByLikesBookId(long bookId);
+    Optional<List<User>> findByLikesBookId(long bookId);
 
 }

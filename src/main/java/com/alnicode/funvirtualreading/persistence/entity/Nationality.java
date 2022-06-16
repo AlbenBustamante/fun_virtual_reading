@@ -50,7 +50,7 @@ public class Nationality {
     @OneToMany(
             mappedBy = "nationality", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Person> persons = Collections.emptySet();
+    private Set<User> users = Collections.emptySet();
 
     @Override
     public boolean equals(Object o) {

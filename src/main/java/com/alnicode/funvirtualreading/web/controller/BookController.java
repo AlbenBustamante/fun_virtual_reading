@@ -4,12 +4,12 @@ import com.alnicode.funvirtualreading.domain.dto.BookRequest;
 import com.alnicode.funvirtualreading.domain.dto.BookResponse;
 import com.alnicode.funvirtualreading.domain.dto.CommentResponse;
 import com.alnicode.funvirtualreading.domain.dto.GenreResponse;
-import com.alnicode.funvirtualreading.domain.dto.PersonResponse;
+import com.alnicode.funvirtualreading.domain.dto.UserResponse;
 import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.domain.service.ICommentService;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
 import com.alnicode.funvirtualreading.domain.service.IGenreService;
-import com.alnicode.funvirtualreading.domain.service.IPersonService;
+import com.alnicode.funvirtualreading.domain.service.IUserService;
 import java.util.List;
 import javax.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
     private IBookService service;
 
     @Autowired
-    private IPersonService personService;
+    private IUserService personService;
 
     @Autowired
     private IGenreService genreService;
@@ -55,7 +55,7 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
      * @return a {@link ResponseEntity} with the persons list
      */
     @GetMapping("{id}/likedBy")
-    public ResponseEntity<List<PersonResponse>> getPersonsWhoLikedIt(@Min(1L) @PathVariable("id") long bookId) {
+    public ResponseEntity<List<UserResponse>> getPersonsWhoLikedIt(@Min(1L) @PathVariable("id") long bookId) {
         return ResponseEntity.of(this.personService.getByBooksLiked(bookId));
     }
 
@@ -66,7 +66,7 @@ public class BookController extends CrudController<BookRequest, BookResponse> {
      * @return a @{@link ResponseEntity} with the person found
      */
     @GetMapping("/{id}/author")
-    public ResponseEntity<PersonResponse> getAuthor(@Min(1L) @PathVariable("id") long bookId) {
+    public ResponseEntity<UserResponse> getAuthor(@Min(1L) @PathVariable("id") long bookId) {
         return ResponseEntity.of(this.personService.getByPublishedBook(bookId));
     }
 

@@ -75,7 +75,7 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id", insertable = false, updatable = false)
-    private Person person;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "genre_id", insertable = false, updatable = false)
@@ -94,7 +94,7 @@ public class Book {
     @ManyToMany(
             mappedBy = "likes", fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Person> persons = Collections.emptySet();
+    private Set<User> users = Collections.emptySet();
 
     /**
      * Set the publication date before being registered.

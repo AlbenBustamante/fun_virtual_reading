@@ -14,7 +14,7 @@ import lombok.Data;
  * @since 1.0
  */
 @Data
-public class PersonRequest {
+public class UserRequest {
     @NotBlank
     private String name;
 

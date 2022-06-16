@@ -64,7 +64,7 @@ public class Collection {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id", insertable = false, updatable = false)
-    private Person person;
+    private User user;
 
     @OneToMany(mappedBy = "collection", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     private Set<CollectionsBook> books = Collections.emptySet();

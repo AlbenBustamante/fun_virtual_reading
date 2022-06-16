@@ -2,12 +2,12 @@ package com.alnicode.funvirtualreading.web.controller;
 
 import com.alnicode.funvirtualreading.domain.dto.BookResponse;
 import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
-import com.alnicode.funvirtualreading.domain.dto.PersonRequest;
-import com.alnicode.funvirtualreading.domain.dto.PersonResponse;
+import com.alnicode.funvirtualreading.domain.dto.UserRequest;
+import com.alnicode.funvirtualreading.domain.dto.UserResponse;
 import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
 import com.alnicode.funvirtualreading.domain.service.INationalityService;
-import com.alnicode.funvirtualreading.domain.service.IPersonService;
+import com.alnicode.funvirtualreading.domain.service.IUserService;
 import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -34,10 +34,10 @@ import static com.alnicode.funvirtualreading.util.AppConstants.LIKES_PATH;
  */
 @Validated
 @RestController
-@RequestMapping("/persons")
-public class PersonController extends CrudController<PersonRequest, PersonResponse> {
+@RequestMapping("/users")
+public class UserController extends CrudController<UserRequest, UserResponse> {
     @Autowired
-    private IPersonService service;
+    private IUserService service;
 
     @Autowired
     private IBookService bookService;
@@ -46,7 +46,7 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
     private INationalityService nationalityService;
 
     @Override
-    protected ICrudService<PersonRequest, PersonResponse> service() {
+    protected ICrudService<UserRequest, UserResponse> service() {
         return this.service;
     }
 
@@ -79,7 +79,7 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
      * @return a {@link ResponseEntity} with the response found
      */
     @GetMapping("/email/{email}")
-    public ResponseEntity<PersonResponse> getByEmail(@NotBlank @Email @PathVariable("email") String email) {
+    public ResponseEntity<UserResponse> getByEmail(@NotBlank @Email @PathVariable("email") String email) {
         return ResponseEntity.of(this.service.getByEmail(email));
     }
 
@@ -90,7 +90,7 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
      * @return a {@link ResponseEntity} with the persons list
      */
     @GetMapping("/nationality/{id}")
-    public ResponseEntity<List<PersonResponse>> getAllByNationality(@Min(1L) @PathVariable("id") long nationalityId) {
+    public ResponseEntity<List<UserResponse>> getAllByNationality(@Min(1L) @PathVariable("id") long nationalityId) {
         return ResponseEntity.of(this.service.getByNationality(nationalityId));
     }
 
@@ -102,7 +102,7 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
      * @return a {@link ResponseEntity} with the person response found
      */
     @PostMapping(LIKES_PATH)
-    public ResponseEntity<PersonResponse> addLike(
+    public ResponseEntity<UserResponse> addLike(
             @Min(1L) @PathVariable("id") long personId,
             @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(this.service.addLike(personId, bookId));
@@ -116,7 +116,7 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
      * @return a {@link ResponseEntity} with the person response found
      */
     @DeleteMapping(LIKES_PATH)
-    public ResponseEntity<PersonResponse> removeLike(
+    public ResponseEntity<UserResponse> removeLike(
             @Min(1L) @PathVariable("id") long personId,
             @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(this.service.removeLike(personId, bookId));

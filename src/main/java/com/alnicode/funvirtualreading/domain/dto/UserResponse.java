@@ -12,7 +12,7 @@ import lombok.Data;
  * @since 1.0
  */
 @Data
-public class PersonResponse {
+public class UserResponse {
     private long id;
     private String name;
     private String lastname;
