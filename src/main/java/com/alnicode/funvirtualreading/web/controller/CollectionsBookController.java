@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import static com.alnicode.funvirtualreading.constants.DateFormatConstants.COLLECTIONS_BOOKS_PATH;
+import static com.alnicode.funvirtualreading.constants.CollectionsBookConstants.COLLECTIONS_BOOKS_PATH;
+import static com.alnicode.funvirtualreading.constants.CollectionsBookConstants.MAIN_PATH;
 
 /**
  * The collections-books rest controller.
@@ -42,7 +43,7 @@ public class CollectionsBookController {
      * @param rating true to get the sorted list or nothing to get the default list
      * @return a {@link ResponseEntity} with the responses list
      */
-    @GetMapping("/collection_books")
+    @GetMapping(MAIN_PATH)
     public ResponseEntity<List<CollectionsBookResponse>> getAll(@RequestParam(required = false) boolean rating) {
         return ResponseEntity.ok(rating ? this.service.getAll() : this.service.getAllOrderByRating());
     }
