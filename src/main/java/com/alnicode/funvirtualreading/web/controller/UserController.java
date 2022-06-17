@@ -23,7 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import static com.alnicode.funvirtualreading.constants.DateFormatConstants.LIKES_PATH;
+import static com.alnicode.funvirtualreading.constants.UserConstants.LIKES_PATH;
+import static com.alnicode.funvirtualreading.constants.UserConstants.MAIN_PATH;
 
 /**
  * The user rest controller.
@@ -34,7 +35,7 @@ import static com.alnicode.funvirtualreading.constants.DateFormatConstants.LIKES
  */
 @Validated
 @RestController
-@RequestMapping("/users")
+@RequestMapping(MAIN_PATH)
 public class UserController extends CrudController<UserRequest, UserResponse> {
     @Autowired
     private IUserService service;

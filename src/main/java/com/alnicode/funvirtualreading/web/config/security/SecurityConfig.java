@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.web.config.security;
 
+import com.alnicode.funvirtualreading.constants.UserConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,7 +33,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users").permitAll()
+                .antMatchers(HttpMethod.POST, UserConstants.MAIN_PATH).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
