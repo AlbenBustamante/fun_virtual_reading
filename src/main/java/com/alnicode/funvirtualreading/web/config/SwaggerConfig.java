@@ -11,7 +11,15 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
-import static com.alnicode.funvirtualreading.constants.DateFormatConstants.CONTROLLERS_PACKAGE;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.CONTACT_EMAIL;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.CONTACT_NAME;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.CONTACT_URL;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.CONTROLLERS_PACKAGE;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.INFO_DESCRIPTION;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.INFO_LICENSE;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.INFO_LICENSE_URL;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.INFO_TITLE;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.INFO_VERSION;
 
 /**
  * Enable and configure Swagger2.
@@ -35,7 +43,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(CONTROLLERS_PACKAGE))
                 .build()
-                .apiInfo(this.info());
+                .apiInfo(info());
     }
 
     /**
@@ -45,16 +53,12 @@ public class SwaggerConfig {
      */
     private ApiInfo info() {
         return new ApiInfoBuilder()
-                .title("Fun Virtual Reading")
-                .description("You do like to read virtual books? This is your site!\n" +
-                        "Here you can register and post your own books.\n" +
-                        "You can comment anothers books.\n" +
-                        "Did you like some book? You can add to your \"likes\" collection or create your collections.\n" +
-                        "\nHave fun!")
-                .contact(this.contact())
-                .version("1.0")
-                .license("Apache License, Version 2.0")
-                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
+                .title(INFO_TITLE)
+                .description(INFO_DESCRIPTION)
+                .contact(contact())
+                .version(INFO_VERSION)
+                .license(INFO_LICENSE)
+                .licenseUrl(INFO_LICENSE_URL)
                 .build();
     }
 
@@ -64,10 +68,6 @@ public class SwaggerConfig {
      * @return the {@link Contact}
      */
     private Contact contact() {
-        return new Contact(
-                "alnicode",
-                "https://www.linkedin.com/in/alben-bustamante/",
-                "albenbustamante@gmail.com"
-        );
+        return new Contact(CONTACT_NAME, CONTACT_URL, CONTACT_EMAIL);
     }
 }
