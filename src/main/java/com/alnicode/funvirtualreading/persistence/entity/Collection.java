@@ -54,7 +54,7 @@ public class Collection {
     private String name;
 
     @DateTimeFormat(iso = ISO.DATE_TIME, pattern = DATE_TIME_FORMAT)
-    @Column(name = "creation_date")
+    @Column(name = "creation_date", nullable = false)
     private LocalDateTime date;
 
     @Min(1L)
