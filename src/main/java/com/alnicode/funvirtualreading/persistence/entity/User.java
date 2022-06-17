@@ -46,7 +46,7 @@ import static com.alnicode.funvirtualreading.constants.DateFormatConstants.DATE_
 @Getter
 @Setter
 @Entity
-@Table(name = "persons")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,7 +102,7 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
-            name = "persons_books",
+            name = "users_books",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     private Set<Book> likes = new HashSet<>();
