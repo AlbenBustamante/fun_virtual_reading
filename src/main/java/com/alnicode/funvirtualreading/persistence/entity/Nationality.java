@@ -12,8 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,17 +30,16 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = "nationalities")
 public class Nationality {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "nationality_id")
     private Long id;
 
-    @Size(min = 3, max = 70)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 70)
     private String country;
 
-    @Size(min = 5, max = 80)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 80)
     private String name;
 
     @OneToMany(
@@ -62,4 +59,5 @@ public class Nationality {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

@@ -1,6 +1,8 @@
 package com.alnicode.funvirtualreading.domain.dto;
 
+import com.alnicode.funvirtualreading.constants.NationalityConstants;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 /**
@@ -12,9 +14,13 @@ import lombok.Data;
  */
 @Data
 public class NationalityRequest {
-    @NotBlank
+
+    @NotBlank(message = NationalityConstants.NAME_BLANK)
+    @Size(min = 5, max = 80, message = NationalityConstants.NAME_SIZE)
     private String name;
 
-    @NotBlank
+    @NotBlank(message = NationalityConstants.COUNTRY_BLANK)
+    @Size(min = 3, max = 70, message = NationalityConstants.COUNTRY_SIZE)
     private String country;
+
 }

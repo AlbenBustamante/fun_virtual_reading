@@ -22,8 +22,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -53,27 +51,23 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Size(min = 3, max = 40)
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = false, length = 40)
     private String firstname;
 
-    @Size(min = 3, max = 60)
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", nullable = false, length = 60)
     private String lastname;
 
-    @Size(min = 12, max = 200)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 200)
     private String email;
 
-    @Size(min = 3, max = 60)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 60)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 40)
     private String password;
 
     @DateTimeFormat(iso = ISO.DATE, pattern = DATE_FORMAT)
-    @NotNull
+    @Column(nullable = false)
     private LocalDate birthday;
 
     @Min(1L)

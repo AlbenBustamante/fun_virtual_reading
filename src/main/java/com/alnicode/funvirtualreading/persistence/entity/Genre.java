@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,17 +30,16 @@ import org.hibernate.Hibernate;
 @Entity
 @Table(name = "genres")
 public class Genre {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "genre_id")
     private Long id;
 
-    @Size(min = 10, max = 100)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 100)
     private String name;
 
-    @Size(min = 40, max = 355)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 355)
     private String description;
 
     @OneToMany(
@@ -61,4 +59,5 @@ public class Genre {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

@@ -10,16 +10,16 @@ package com.alnicode.funvirtualreading.constants;
 public class BookConstants {
 
     /* ===============================
-       EXCEPTION MESSAGES
-    -> =============================== */
+       -> EXCEPTION MESSAGES
+       =============================== */
     public static final String TITLE_EXISTS = "This title is already in use, try another";
     public static final String SYNOPSIS_EXISTS = "This synopsis is already in use, try another";
     public static final String BODY_EXISTS = "The body is already in use, try another";
-    /* ============================ <- */
+    /* =============================== */
 
     /* ===============================
-       VALIDATION MESSAGES
-    -> =============================== */
+       -> VALIDATION MESSAGES
+       =============================== */
     // BLANK
     public static final String TITLE_BLANK = "The title cannot be blank";
     public static final String SYNOPSIS_BLANK = "The synopsis cannot be blank";
@@ -34,7 +34,7 @@ public class BookConstants {
     public static final String TITLE_SIZE = "The title must be between 10 and 130 characters";
     public static final String SYNOPSIS_SIZE = "The synopsis must be between 100 and 600 characters";
     public static final String BODY_SIZE = "The body must be between 1000 and 4000 characters";
-    /* ============================ <- */
+    /* =============================== */
 
     private BookConstants() { }
 

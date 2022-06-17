@@ -18,8 +18,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -49,8 +47,7 @@ public class Collection {
     @Column(name = "collection_id")
     private Long collectionId;
 
-    @NotNull
-    @Size(min = 6, max = 200)
+    @Column(nullable = false, length = 200)
     private String name;
 
     @DateTimeFormat(iso = ISO.DATE_TIME, pattern = DATE_TIME_FORMAT)

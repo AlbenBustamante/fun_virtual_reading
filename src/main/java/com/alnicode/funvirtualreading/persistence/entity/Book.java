@@ -19,7 +19,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -49,16 +48,13 @@ public class Book {
     @Column(name = "book_id")
     private Long bookId;
 
-    @Size(min = 10, max = 130)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 130)
     private String title;
 
-    @Size(min = 100, max = 600)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 600)
     private String synopsis;
 
-    @Size(min = 1000, max = 4000)
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 4000)
     private String body;
 
     @Min(1L)
@@ -116,4 +112,5 @@ public class Book {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

@@ -1,8 +1,10 @@
 package com.alnicode.funvirtualreading.domain.dto;
 
+import com.alnicode.funvirtualreading.constants.CollectionConstants;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 /**
@@ -14,10 +16,13 @@ import lombok.Data;
  */
 @Data
 public class CollectionRequest {
-    @NotBlank
+
+    @NotBlank(message = CollectionConstants.NAME_BLANK)
+    @Size(min = 6, max = 200, message = CollectionConstants.NAME_SIZE)
     private String name;
 
-    @NotNull
-    @Min(1L)
+    @NotNull(message = CollectionConstants.USER_NULL)
+    @Min(value = 1L, message = CollectionConstants.USER_MIN)
     private long userId;
+
 }

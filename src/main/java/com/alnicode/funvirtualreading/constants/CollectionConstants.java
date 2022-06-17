@@ -10,8 +10,8 @@ package com.alnicode.funvirtualreading.constants;
 public class CollectionConstants {
 
     /* ===============================
-       VALIDATION MESSAGES
-    -> =============================== */
+       -> VALIDATION MESSAGES
+       =============================== */
     // BLANK
     public static final String NAME_BLANK = "The name cannot be blank";
     // NULL
@@ -20,7 +20,7 @@ public class CollectionConstants {
     public static final String USER_MIN = "The user ID must be at least 1";
     // SIZE
     public static final String NAME_SIZE = "The name must be between 6 and 200 characters";
-    /* ============================ <- */
+    /* =============================== */
 
     private CollectionConstants() { }
 

@@ -1,6 +1,8 @@
 package com.alnicode.funvirtualreading.domain.dto;
 
+import com.alnicode.funvirtualreading.constants.GenreConstants;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 /**
@@ -12,9 +14,13 @@ import lombok.Data;
  */
 @Data
 public class GenreRequest {
-    @NotBlank
+
+    @NotBlank(message = GenreConstants.NAME_BLANK)
+    @Size(min = 10, max = 100, message = GenreConstants.NAME_SIZE)
     private String name;
 
-    @NotBlank
+    @NotBlank(message = GenreConstants.DESCRIPTION_BLANK)
+    @Size(min = 40, max = 355, message = GenreConstants.DESCRIPTION_SIZE)
     private String description;
+
 }

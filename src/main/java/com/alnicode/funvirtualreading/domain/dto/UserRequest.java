@@ -1,9 +1,11 @@
 package com.alnicode.funvirtualreading.domain.dto;
 
+import com.alnicode.funvirtualreading.constants.UserConstants;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.Data;
 
 /**
@@ -15,30 +17,37 @@ import lombok.Data;
  */
 @Data
 public class UserRequest {
-    @NotBlank
+
+    @NotBlank(message = UserConstants.FIRST_NAME_BLANK)
+    @Size(min = 3, max = 40, message = UserConstants.FIRST_NAME_SIZE)
     private String firstname;
 
-    @NotBlank
+    @NotBlank(message = UserConstants.LAST_NAME_BLANK)
+    @Size(min = 3, max = 60, message = UserConstants.LAST_NAME_SIZE)
     private String lastname;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = UserConstants.EMAIL_BLANK)
+    @Email(message = UserConstants.EMAIL_FORMAT)
+    @Size(min = 12, max = 200, message = UserConstants.EMAIL_SIZE)
     private String email;
 
-    @NotBlank
+    @NotBlank(message = UserConstants.USERNAME_BLANK)
+    @Size(min = 3, max = 60, message = UserConstants.USERNAME_SIZE)
     private String username;
 
-    @NotBlank
+    @NotBlank(message = UserConstants.PASSWORD_BLANK)
+    @Size(min = 8, max = 40, message = UserConstants.PASSWORD_SIZE)
     private String password;
 
-    @NotBlank
+    @NotBlank(message = UserConstants.RPASSWORD_BLANK)
+    @Size(min = 8, max = 40, message = UserConstants.PASSWORD_SIZE)
     private String rpassword;
 
-    @NotBlank
+    @NotBlank(message = UserConstants.BIRTHDAY_BLANK)
     private String birthday;
 
-    @NotNull
-    @Min(1L)
+    @NotNull(message = UserConstants.NATIONALITY_NULL)
+    @Min(value = 1L, message = UserConstants.NATIONALITY_MIN)
     private long nationalityId;
 
     /**
