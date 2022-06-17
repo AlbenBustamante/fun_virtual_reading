@@ -52,16 +52,14 @@ public class Comment {
     @Column(name = "publication_date")
     private LocalDateTime date;
 
-    @NotNull
     @Min(1L)
     @Max(Long.MAX_VALUE)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @NotNull
     @Min(1L)
     @Max(Long.MAX_VALUE)
-    @Column(name = "book_id")
+    @Column(name = "book_id", nullable = false)
     private Long bookId;
 
     @ManyToOne(fetch = FetchType.LAZY)

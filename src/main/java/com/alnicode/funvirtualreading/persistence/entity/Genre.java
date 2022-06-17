@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,12 +36,12 @@ public class Genre {
     @Column(name = "genre_id")
     private Long id;
 
-    @NotNull
     @Size(min = 10, max = 100)
+    @Column(unique = true, nullable = false)
     private String name;
 
-    @NotNull
     @Size(min = 40, max = 355)
+    @Column(unique = true, nullable = false)
     private String description;
 
     @OneToMany(

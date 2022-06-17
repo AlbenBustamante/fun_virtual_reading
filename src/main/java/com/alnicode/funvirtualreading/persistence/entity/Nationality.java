@@ -38,13 +38,11 @@ public class Nationality {
     private Long id;
 
     @Size(min = 3, max = 70)
-    @NotNull
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String country;
 
     @Size(min = 5, max = 80)
-    @NotNull
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
 
     @OneToMany(

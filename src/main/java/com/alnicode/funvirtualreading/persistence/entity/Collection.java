@@ -43,6 +43,7 @@ import static com.alnicode.funvirtualreading.constants.DateFormatConstants.DATE_
 @Entity
 @Table(name = "collections")
 public class Collection {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "collection_id")
@@ -56,10 +57,9 @@ public class Collection {
     @Column(name = "creation_date")
     private LocalDateTime date;
 
-    @NotNull
     @Min(1L)
     @Max(Long.MAX_VALUE)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
     @ManyToOne(fetch = FetchType.LAZY)

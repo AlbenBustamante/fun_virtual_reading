@@ -19,7 +19,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,33 +43,32 @@ import static com.alnicode.funvirtualreading.constants.DateFormatConstants.DATE_
 @Entity
 @Table(name = "books")
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
     private Long bookId;
 
-    @NotNull
     @Size(min = 10, max = 130)
+    @Column(unique = true, nullable = false)
     private String title;
 
-    @NotNull
     @Size(min = 100, max = 600)
+    @Column(unique = true, nullable = false)
     private String synopsis;
 
-    @NotNull
     @Size(min = 1000, max = 4000)
+    @Column(unique = true, nullable = false)
     private String body;
 
-    @NotNull
     @Min(1L)
     @Max(Long.MAX_VALUE)
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @NotNull
     @Min(1L)
     @Max(Long.MAX_VALUE)
-    @Column(name = "genre_id")
+    @Column(name = "genre_id", nullable = false)
     private Long genreId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -82,7 +80,7 @@ public class Book {
     private Genre genre;
 
     @DateTimeFormat(iso = ISO.DATE_TIME, pattern = DATE_TIME_FORMAT)
-    @Column(name = "publication_date")
+    @Column(name = "publication_date", nullable = false)
     private LocalDateTime date;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})

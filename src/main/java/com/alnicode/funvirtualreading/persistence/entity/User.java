@@ -62,8 +62,7 @@ public class User {
     private String lastname;
 
     @Size(min = 12, max = 200)
-    @NotNull
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Size(min = 3, max = 60)
@@ -77,10 +76,9 @@ public class User {
     @NotNull
     private LocalDate birthday;
 
-    @NotNull
     @Min(1L)
     @Max(Long.MAX_VALUE)
-    @Column(name = "nationality_id")
+    @Column(name = "nationality_id", nullable = false)
     private Long nationalityId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -88,7 +86,7 @@ public class User {
     private Nationality nationality;
 
     @DateTimeFormat(iso = ISO.DATE_TIME, pattern = DATE_TIME_FORMAT)
-    @Column(name = "registration_date")
+    @Column(name = "registration_date", nullable = false)
     private LocalDateTime date;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
