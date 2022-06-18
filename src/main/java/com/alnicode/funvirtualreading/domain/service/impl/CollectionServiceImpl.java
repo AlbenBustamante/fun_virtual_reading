@@ -30,7 +30,7 @@ public class CollectionServiceImpl implements ICollectionService {
 
     @Override
     @Transactional
-    public CollectionResponse save(CollectionRequest request) {
+    public CollectionResponse create(CollectionRequest request) {
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 

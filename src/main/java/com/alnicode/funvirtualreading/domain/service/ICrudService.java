@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.domain.service;
 
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
@@ -26,7 +27,7 @@ public interface ICrudService<Request, Response> {
      * @param request the request to be saved
      * @return the response
      */
-    Response save(Request request);
+    Response create(Request request) throws RegisterNotValidException;
 
     /**
      * Get all the responses.

@@ -30,7 +30,7 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     @Transactional
-    public BookResponse save(BookRequest request) {
+    public BookResponse create(BookRequest request) {
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 

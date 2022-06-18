@@ -2,6 +2,7 @@ package com.alnicode.funvirtualreading.domain.service;
 
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookRequest;
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookResponse;
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public interface ICollectionsBookService {
      * @see com.alnicode.funvirtualreading.persistence.entity.Collection
      * @see com.alnicode.funvirtualreading.persistence.entity.Book
      */
-    CollectionsBookResponse save(long collectionId, long bookId, CollectionsBookRequest request);
+    CollectionsBookResponse create(long collectionId, long bookId, CollectionsBookRequest request) throws RegisterNotValidException;
 
     /**
      * Get all the collections-books responses.

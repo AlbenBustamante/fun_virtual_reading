@@ -30,7 +30,7 @@ public class GenreServiceImpl implements IGenreService {
 
     @Override
     @Transactional
-    public GenreResponse save(GenreRequest request) {
+    public GenreResponse create(GenreRequest request) {
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 

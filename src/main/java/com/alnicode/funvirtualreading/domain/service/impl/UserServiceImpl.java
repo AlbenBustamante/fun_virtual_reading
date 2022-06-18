@@ -50,7 +50,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional
-    public UserResponse save(UserRequest request) {
+    public UserResponse create(UserRequest request) {
         final var entity = mapper.toEntity(request);
 
         entity.setPassword(encoder.encode(request.getPassword()));

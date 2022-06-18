@@ -1,6 +1,7 @@
 package com.alnicode.funvirtualreading.web.controller;
 
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -66,8 +67,8 @@ public abstract class CrudController<Request, Response> {
      * @return a {@link ResponseEntity} with the response registered.
      */
     @PostMapping
-    public ResponseEntity<Response> register(@Valid @RequestBody Request request) {
-        return status(CREATED).body(this.service().save(request));
+    public ResponseEntity<Response> register(@Valid @RequestBody Request request) throws RegisterNotValidException {
+        return status(CREATED).body(this.service().create(request));
     }
 
     /**

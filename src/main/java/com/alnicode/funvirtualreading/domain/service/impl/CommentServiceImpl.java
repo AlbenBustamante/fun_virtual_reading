@@ -35,7 +35,7 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     @Transactional
-    public CommentResponse save(CommentRequest request) {
+    public CommentResponse create(CommentRequest request) {
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 

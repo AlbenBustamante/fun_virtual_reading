@@ -30,7 +30,7 @@ public class NationalityServiceImpl implements INationalityService {
 
     @Override
     @Transactional
-    public NationalityResponse save(NationalityRequest request) {
+    public NationalityResponse create(NationalityRequest request) {
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 

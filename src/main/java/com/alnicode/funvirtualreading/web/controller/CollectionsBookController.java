@@ -3,6 +3,7 @@ package com.alnicode.funvirtualreading.web.controller;
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookRequest;
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookResponse;
 import com.alnicode.funvirtualreading.domain.service.ICollectionsBookService;
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -45,7 +46,7 @@ public class CollectionsBookController {
      */
     @GetMapping(MAIN_PATH)
     public ResponseEntity<List<CollectionsBookResponse>> getAll(@RequestParam(required = false) boolean rating) {
-        return ResponseEntity.ok(rating ? this.service.getAll() : this.service.getAllOrderByRating());
+        return ResponseEntity.ok(rating ? service.getAll() : service.getAllOrderByRating());
     }
 
     /**
@@ -56,10 +57,9 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the response found
      */
     @GetMapping(COLLECTIONS_BOOKS_PATH)
-    public ResponseEntity<CollectionsBookResponse> get(
-            @Min(1L) @PathVariable("collectionId") long collectionId,
-            @Min(1L) @PathVariable("bookId") long bookId) {
-        return ResponseEntity.of(this.service.get(collectionId, bookId));
+    public ResponseEntity<CollectionsBookResponse> get(@Min(1L) @PathVariable("collectionId") long collectionId,
+                                                       @Min(1L) @PathVariable("bookId") long bookId) {
+        return ResponseEntity.of(service.get(collectionId, bookId));
     }
 
     /**
@@ -71,12 +71,12 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the response registered
      */
     @PostMapping(COLLECTIONS_BOOKS_PATH)
-    public ResponseEntity<CollectionsBookResponse> register(
-            @Min(1L) @PathVariable("collectionId") long collectionId,
-            @Min(1L) @PathVariable("bookId") long bookId,
-            @Valid @RequestBody CollectionsBookRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.service.save(collectionId, bookId, request));
+    public ResponseEntity<CollectionsBookResponse> register(@Min(1L) @PathVariable("collectionId") long collectionId,
+                                                            @Min(1L) @PathVariable("bookId") long bookId,
+                                                            @Valid @RequestBody CollectionsBookRequest request)
+            throws RegisterNotValidException {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(collectionId, bookId, request));
     }
 
     /**
@@ -88,11 +88,10 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the response updated
      */
     @PutMapping(COLLECTIONS_BOOKS_PATH)
-    public ResponseEntity<CollectionsBookResponse> update(
-            @Min(1L) @PathVariable("collectionId") long collectionId,
-            @Min(1L) @PathVariable("bookId") long bookId,
-            @Valid @RequestBody CollectionsBookRequest request) {
-        return ResponseEntity.of(this.service.update(collectionId, bookId, request));
+    public ResponseEntity<CollectionsBookResponse> update(@Min(1L) @PathVariable("collectionId") long collectionId,
+                                                          @Min(1L) @PathVariable("bookId") long bookId,
+                                                          @Valid @RequestBody CollectionsBookRequest request) {
+        return ResponseEntity.of(service.update(collectionId, bookId, request));
     }
 
     /**
@@ -103,10 +102,8 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the 200 or 404 code
      */
     @DeleteMapping(COLLECTIONS_BOOKS_PATH)
-    public ResponseEntity<CollectionsBookResponse> delete(
-            @Min(1L) @PathVariable("collectionId") long collectionId,
-            @Min(1L) @PathVariable("bookId") long bookId) {
-        return this.service.delete(collectionId, bookId) ? ResponseEntity.ok().build()
-                : ResponseEntity.notFound().build();
+    public ResponseEntity<CollectionsBookResponse> delete(@Min(1L) @PathVariable("collectionId") long collectionId,
+                                                          @Min(1L) @PathVariable("bookId") long bookId) {
+        return service.delete(collectionId, bookId) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }

@@ -29,7 +29,7 @@ public class CollectionsBookServiceImpl implements ICollectionsBookService {
 
     @Override
     @Transactional
-    public CollectionsBookResponse save(long collectionId, long bookId, CollectionsBookRequest request) {
+    public CollectionsBookResponse create(long collectionId, long bookId, CollectionsBookRequest request) {
         var entity = this.mapper.toEntity(request);
         entity.setId(this.toPK(collectionId, bookId));
 
