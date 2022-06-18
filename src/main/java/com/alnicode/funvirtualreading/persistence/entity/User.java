@@ -63,7 +63,7 @@ public class User {
     @Column(nullable = false, unique = true, length = 60)
     private String username;
 
-    @Column(nullable = false, length = 40)
+    @Column(nullable = false)
     private String password;
 
     @DateTimeFormat(iso = ISO.DATE, pattern = DATE_FORMAT)
