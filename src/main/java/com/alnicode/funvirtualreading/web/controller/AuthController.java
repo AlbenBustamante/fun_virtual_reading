@@ -3,15 +3,16 @@ package com.alnicode.funvirtualreading.web.controller;
 import com.alnicode.funvirtualreading.constants.UserConstants;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationRequest;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationResponse;
-import com.alnicode.funvirtualreading.domain.service.IUserService;
 import com.alnicode.funvirtualreading.web.config.security.jwt.JWTUtil;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,8 @@ public class AuthController {
     private AuthenticationManager manager;
 
     @Autowired
-    private IUserService userService;
+    @Qualifier("appUserDetailsService")
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private JWTUtil jwtUtil;
@@ -49,7 +51,7 @@ public class AuthController {
     public ResponseEntity<AuthenticationResponse> generateToken(@NotNull @Valid @RequestBody AuthenticationRequest request) {
         try {
             manager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-            final var userDetails = userService.loadUserByUsername(request.getUsername());
+            final var userDetails = userDetailsService.loadUserByUsername(request.getUsername());
             final var jwt = jwtUtil.generateToken(userDetails);
 
             return ResponseEntity.ok(new AuthenticationResponse(jwt));

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  * @version 1.0
  */
-@Service
+@Service("appUserDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
