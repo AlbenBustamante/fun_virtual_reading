@@ -3,6 +3,7 @@ package com.alnicode.funvirtualreading.domain.service.impl;
 import com.alnicode.funvirtualreading.domain.dto.GenreRequest;
 import com.alnicode.funvirtualreading.domain.dto.GenreResponse;
 import com.alnicode.funvirtualreading.domain.service.IGenreService;
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import com.alnicode.funvirtualreading.persistence.entity.Genre;
 import com.alnicode.funvirtualreading.persistence.mapper.GenreMapper;
 import com.alnicode.funvirtualreading.persistence.repository.GenreRepository;
@@ -12,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+import static com.alnicode.funvirtualreading.constants.GenreConstants.DESCRIPTION_EXISTS;
+import static com.alnicode.funvirtualreading.constants.GenreConstants.NAME_EXISTS;
 
 /**
  * The genre service implementation.
@@ -30,7 +35,9 @@ public class GenreServiceImpl implements IGenreService {
 
     @Override
     @Transactional
-    public GenreResponse create(GenreRequest request) {
+    public GenreResponse create(GenreRequest request) throws RegisterNotValidException {
+        checkData(request);
+
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 
@@ -68,6 +75,16 @@ public class GenreServiceImpl implements IGenreService {
     @Transactional(readOnly = true)
     public Optional<GenreResponse> getByBookId(long bookId) {
         return this.repository.findByBooksBookId(bookId).map(mapper::toResponse);
+    }
+
+    private void checkData(GenreRequest request) throws RegisterNotValidException {
+        if (repository.existsByName(request.getName())) {
+            throw new RegisterNotValidException(NAME_EXISTS, "name");
+        }
+
+        if (repository.existsByDescription(request.getDescription())) {
+            throw new RegisterNotValidException(DESCRIPTION_EXISTS, "description");
+        }
     }
 
 }

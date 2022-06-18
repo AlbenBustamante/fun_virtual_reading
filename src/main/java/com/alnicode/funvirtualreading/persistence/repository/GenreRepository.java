@@ -23,4 +23,20 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
      */
     Optional<Genre> findByBooksBookId(long bookId);
 
+    /**
+     * Check if a genre exists by the name.
+     *
+     * @param name the name to check
+     * @return {@code true} if already exists
+     */
+    boolean existsByName(String name);
+
+    /**
+     * Check if a genre exists by the description.
+     *
+     * @param description the description to check
+     * @return {@code true} if already exists
+     */
+    boolean existsByDescription(String description);
+
 }
