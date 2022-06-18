@@ -7,7 +7,7 @@ package com.alnicode.funvirtualreading.constants;
  * @since 1.0
  * @version 1.0
  */
-public class BookConstants {
+public final class BookConstants {
 
     /* ===============================
        -> EXCEPTION MESSAGES

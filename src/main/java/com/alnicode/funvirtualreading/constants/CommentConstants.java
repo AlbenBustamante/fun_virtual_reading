@@ -7,7 +7,7 @@ package com.alnicode.funvirtualreading.constants;
  * @since 1.0
  * @version 1.0
  */
-public class CommentConstants {
+public final class CommentConstants {
 
     /* ===============================
        -> VALIDATION MESSAGES
