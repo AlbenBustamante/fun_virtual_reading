@@ -1,13 +1,17 @@
 package com.alnicode.funvirtualreading.web.config.security;
 
 import com.alnicode.funvirtualreading.constants.UserConstants;
+import com.alnicode.funvirtualreading.web.config.security.jwt.JWTFilterRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * Configure the application security.
@@ -18,6 +22,9 @@ import org.springframework.security.web.SecurityFilterChain;
  */
 @Configuration
 public class SecurityConfig {
+
+    @Autowired
+    private JWTFilterRequest filterRequest;
 
     /**
      * Define a password encoder bean by default.
@@ -40,10 +47,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, UserConstants.MAIN_PATH).permitAll()
+                .antMatchers(HttpMethod.POST, UserConstants.MAIN_PATH, UserConstants.AUTH_PATH).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic()
+                .addFilterBefore(filterRequest, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .build();
     }
