@@ -8,6 +8,8 @@ package com.alnicode.funvirtualreading.constants;
  * @version 1.0
  */
 public final class SwaggerConstants {
+    public static final String API_KEY_NAME = "JWT token";
+    public static final String API_KEY_PASS_ASS = "header";
 
     public static final String CONTROLLERS_PACKAGE = "com.alnicode.funvirtualreading.web.controller";
     public static final String INFO_TITLE = "Fun Virtual Reading";
