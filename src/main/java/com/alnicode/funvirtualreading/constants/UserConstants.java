@@ -14,6 +14,7 @@ public final class UserConstants {
        =============================== */
     public static final String MAIN_PATH = "/users";
     public static final String LIKES_PATH = "{id}/book/{bookId}";
+    public static final String AUTH_PATH = "/auth";
     /* =============================== */
 
     /* ===============================

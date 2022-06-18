@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.web.controller;
 
+import com.alnicode.funvirtualreading.constants.UserConstants;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationRequest;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationResponse;
 import com.alnicode.funvirtualreading.domain.service.IUserService;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(UserConstants.AUTH_PATH)
 @Validated
 public class AuthController {
 
