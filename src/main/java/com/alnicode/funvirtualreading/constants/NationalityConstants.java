@@ -12,7 +12,6 @@ public final class NationalityConstants {
     /* ===============================
        -> EXCEPTION MESSAGES
        =============================== */
-    public static final String NAME_EXISTS = "This name is already in use, try another";
     public static final String COUNTRY_EXISTS = "This country is already in use, try another";
     /* =============================== */
 

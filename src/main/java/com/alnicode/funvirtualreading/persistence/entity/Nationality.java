@@ -39,7 +39,7 @@ public class Nationality {
     @Column(unique = true, nullable = false, length = 70)
     private String country;
 
-    @Column(unique = true, nullable = false, length = 80)
+    @Column(nullable = false, length = 80)
     private String name;
 
     @OneToMany(

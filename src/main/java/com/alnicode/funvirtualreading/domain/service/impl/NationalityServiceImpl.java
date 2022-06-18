@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import static com.alnicode.funvirtualreading.constants.NationalityConstants.COUNTRY_EXISTS;
-import static com.alnicode.funvirtualreading.constants.NationalityConstants.NAME_EXISTS;
 
 /**
  * The nationality service implementation.
@@ -90,10 +89,6 @@ public class NationalityServiceImpl implements INationalityService {
     }
 
     private void checkData(NationalityRequest request) throws RegisterNotValidException {
-        if (repository.existsByName(request.getName())) {
-            throw new RegisterNotValidException(NAME_EXISTS, "name");
-        }
-
         if (repository.findByCountry(request.getCountry()).isPresent()) {
             throw new RegisterNotValidException(COUNTRY_EXISTS, "country");
         }
