@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.web.advice;
 
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
@@ -59,6 +60,16 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         });
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RegisterNotValidException.class)
+    public ResponseEntity<Object> handleRegisterNotValid(RegisterNotValidException ex) {
+        final Map<String, String> body = new LinkedHashMap<>();
+
+        body.put("timestamp", timestamp());
+        body.put("error", ex.getMessage());
+
+        return ResponseEntity.badRequest().body(body);
     }
 
     /**
