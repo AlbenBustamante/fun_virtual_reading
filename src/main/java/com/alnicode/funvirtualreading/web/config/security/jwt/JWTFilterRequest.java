@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.web.config.security.jwt;
 
+import com.alnicode.funvirtualreading.constants.UserConstants;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -31,7 +32,7 @@ public class JWTFilterRequest extends OncePerRequestFilter {
     private JWTUtil jwtUtil;
 
     @Autowired
-    @Qualifier("appUserDetailsService")
+    @Qualifier(UserConstants.USER_DETAILS_SERVICE)
     private UserDetailsService userDetailsService;
 
     @Override

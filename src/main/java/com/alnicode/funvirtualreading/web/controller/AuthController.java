@@ -35,7 +35,7 @@ public class AuthController {
     private AuthenticationManager manager;
 
     @Autowired
-    @Qualifier("appUserDetailsService")
+    @Qualifier(UserConstants.USER_DETAILS_SERVICE)
     private UserDetailsService userDetailsService;
 
     @Autowired

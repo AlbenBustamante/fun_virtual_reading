@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.domain.service.impl;
 
+import com.alnicode.funvirtualreading.constants.UserConstants;
 import com.alnicode.funvirtualreading.persistence.entity.Role;
 import com.alnicode.funvirtualreading.persistence.repository.UserRepository;
 import java.util.Collection;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @since 1.0
  * @version 1.0
  */
-@Service("appUserDetailsService")
+@Service(UserConstants.USER_DETAILS_SERVICE)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

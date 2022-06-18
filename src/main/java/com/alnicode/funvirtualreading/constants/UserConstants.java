@@ -10,6 +10,12 @@ package com.alnicode.funvirtualreading.constants;
 public final class UserConstants {
 
     /* ===============================
+       -> SECURITY
+       =============================== */
+    public static final String USER_DETAILS_SERVICE = "customUserDetailsServiceImpl";
+    /* =============================== */
+
+    /* ===============================
        -> REQUEST MAPPING PATHS
        =============================== */
     public static final String MAIN_PATH = "/users";
