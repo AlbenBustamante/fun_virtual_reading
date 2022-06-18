@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -56,7 +57,7 @@ public class AuthController {
 
             return ResponseEntity.ok(new AuthenticationResponse(jwt));
         } catch (BadCredentialsException ex) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
     }
 
