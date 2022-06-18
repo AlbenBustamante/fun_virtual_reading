@@ -40,4 +40,28 @@ public interface BookRepository extends JpaRepository<Book, Long> {
      */
     Optional<Book> findByCommentsId(long commentId);
 
+    /**
+     * Check if a book with the same title already exists.
+     *
+     * @param title the title to check
+     * @return {@code true} if already exists
+     */
+    boolean existsByTitle(String title);
+
+    /**
+     * Check if a book with the same synopsis already exists.
+     *
+     * @param synopsis the synopsis to check
+     * @return {@code true} if already exists
+     */
+    boolean existsBySynopsis(String synopsis);
+
+    /**
+     * Check if a book with the same body already exists.
+     *
+     * @param body the body to check
+     * @return {@code true} if already exists
+     */
+    boolean existsByBody(String body);
+
 }

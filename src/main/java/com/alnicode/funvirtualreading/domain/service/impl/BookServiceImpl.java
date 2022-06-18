@@ -3,6 +3,7 @@ package com.alnicode.funvirtualreading.domain.service.impl;
 import com.alnicode.funvirtualreading.domain.dto.BookRequest;
 import com.alnicode.funvirtualreading.domain.dto.BookResponse;
 import com.alnicode.funvirtualreading.domain.service.IBookService;
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import com.alnicode.funvirtualreading.persistence.entity.Book;
 import com.alnicode.funvirtualreading.persistence.mapper.BookMapper;
 import com.alnicode.funvirtualreading.persistence.repository.BookRepository;
@@ -12,6 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+import static com.alnicode.funvirtualreading.constants.BookConstants.BODY_EXISTS;
+import static com.alnicode.funvirtualreading.constants.BookConstants.SYNOPSIS_EXISTS;
+import static com.alnicode.funvirtualreading.constants.BookConstants.TITLE_EXISTS;
 
 /**
  * The book service implementation.
@@ -30,7 +36,9 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     @Transactional
-    public BookResponse create(BookRequest request) {
+    public BookResponse create(BookRequest request) throws RegisterNotValidException {
+        checkData(request);
+
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 
@@ -83,6 +91,20 @@ public class BookServiceImpl implements IBookService {
     @Transactional(readOnly = true)
     public Optional<BookResponse> getByComment(long commentId) {
         return this.repository.findByCommentsId(commentId).map(mapper::toResponse);
+    }
+
+    private void checkData(BookRequest request) throws RegisterNotValidException {
+        if (repository.existsByTitle(request.getTitle())) {
+            throw new RegisterNotValidException(TITLE_EXISTS, "title");
+        }
+
+        if (repository.existsBySynopsis(request.getSynopsis())) {
+            throw new RegisterNotValidException(SYNOPSIS_EXISTS, "synopsis");
+        }
+
+        if (repository.existsByBody(request.getBody())) {
+            throw new RegisterNotValidException(BODY_EXISTS, "body");
+        }
     }
 
 }
