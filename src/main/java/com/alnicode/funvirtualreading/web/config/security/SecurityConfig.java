@@ -62,6 +62,8 @@ public class SecurityConfig {
         return http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, UserConstants.MAIN_PATH, UserConstants.AUTH_PATH).permitAll()
+                .antMatchers("/v2/api-docs", "/configuration/ui", "/configuration/security").permitAll() //Swagger #1
+                .antMatchers("/swagger-ui/**", "/swagger-resources/**", "/webjars/**").permitAll() //Swagger #2
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(filterRequest, UsernamePasswordAuthenticationFilter.class)
