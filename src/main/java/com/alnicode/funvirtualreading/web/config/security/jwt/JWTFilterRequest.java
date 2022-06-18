@@ -15,6 +15,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+
+import static com.alnicode.funvirtualreading.constants.JWTConstants.HEADER;
+
 /**
  * Filter the request to verify if the token is valid and set the authentication.
  *
@@ -24,7 +27,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 @Component
 public class JWTFilterRequest extends OncePerRequestFilter {
-    private static final String HEADER = "Authorization";
     private static final String PREFIX = "Bearer";
     private static final int BEGIN_INDEX = PREFIX.length() + 1;
 
