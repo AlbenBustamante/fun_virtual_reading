@@ -11,7 +11,7 @@ public final class SwaggerConstants {
     public static final String API_KEY_NAME = "JWT token";
     public static final String API_KEY_PASS_ASS = "header";
 
-    public static final String CONTROLLERS_PACKAGE = "com.alnicode.funvirtualreading.web.controller";
+    public static final String CONTROLLERS_PACKAGE = "com.alnicode.funvirtualreading.web.rest";
     public static final String INFO_TITLE = "Fun Virtual Reading";
     public static final String INFO_DESCRIPTION = "You do like to read virtual books? This is your site!\n" +
             "Here you can register and post your own books.\n" +

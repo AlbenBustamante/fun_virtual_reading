@@ -1,4 +1,4 @@
-package com.alnicode.funvirtualreading.web.controller;
+package com.alnicode.funvirtualreading.web.rest;
 
 import com.alnicode.funvirtualreading.domain.dto.BookResponse;
 import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
