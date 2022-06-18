@@ -4,6 +4,7 @@ import com.alnicode.funvirtualreading.domain.dto.UserRequest;
 import com.alnicode.funvirtualreading.domain.dto.UserResponse;
 import com.alnicode.funvirtualreading.domain.service.IUserService;
 import com.alnicode.funvirtualreading.enums.RoleType;
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import com.alnicode.funvirtualreading.persistence.entity.Role;
 import com.alnicode.funvirtualreading.persistence.entity.User;
 import com.alnicode.funvirtualreading.persistence.mapper.UserMapper;
@@ -23,6 +24,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+import static com.alnicode.funvirtualreading.constants.UserConstants.EMAIL_EXISTS;
+import static com.alnicode.funvirtualreading.constants.UserConstants.PASSWORDS_DO_NOT_MATCH;
+import static com.alnicode.funvirtualreading.constants.UserConstants.USERNAME_EXISTS;
 
 /**
  * The user service implementation.
@@ -50,7 +56,9 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional
-    public UserResponse create(UserRequest request) {
+    public UserResponse create(UserRequest request) throws RegisterNotValidException {
+        checkData(request);
+
         final var entity = mapper.toEntity(request);
 
         entity.setPassword(encoder.encode(request.getPassword()));
@@ -176,4 +184,19 @@ public class UserServiceImpl implements IUserService {
 
         return role.orElseGet(() -> new Role(RoleType.ROLE_USER));
     }
+
+    private void checkData(UserRequest request) throws RegisterNotValidException {
+        if (repository.findByUsername(request.getUsername()).isPresent()) {
+            throw new RegisterNotValidException(USERNAME_EXISTS, "username");
+        }
+
+        if (repository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RegisterNotValidException(EMAIL_EXISTS, "email");
+        }
+
+        if (!request.passwordsMatch()) {
+            throw new RegisterNotValidException(PASSWORDS_DO_NOT_MATCH, "rpassword");
+        }
+    }
+
 }
