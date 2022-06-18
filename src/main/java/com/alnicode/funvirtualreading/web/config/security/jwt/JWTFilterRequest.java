@@ -1,4 +1,4 @@
-package com.alnicode.funvirtualreading.web.config.security;
+package com.alnicode.funvirtualreading.web.config.security.jwt;
 
 import com.alnicode.funvirtualreading.domain.service.IUserService;
 import java.io.IOException;

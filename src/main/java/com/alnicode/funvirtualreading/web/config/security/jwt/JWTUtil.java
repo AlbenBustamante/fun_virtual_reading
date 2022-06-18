@@ -1,4 +1,4 @@
-package com.alnicode.funvirtualreading.web.config.security;
+package com.alnicode.funvirtualreading.web.config.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

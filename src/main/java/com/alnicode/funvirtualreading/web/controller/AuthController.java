@@ -4,7 +4,7 @@ import com.alnicode.funvirtualreading.constants.UserConstants;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationRequest;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationResponse;
 import com.alnicode.funvirtualreading.domain.service.IUserService;
-import com.alnicode.funvirtualreading.web.config.security.JWTUtil;
+import com.alnicode.funvirtualreading.web.config.security.jwt.JWTUtil;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
