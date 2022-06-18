@@ -39,4 +39,12 @@ public interface NationalityRepository extends JpaRepository<Nationality, Long> 
      */
     Optional<Nationality> findByUsersId(long userId);
 
+    /**
+     * Check if a nationality exists by the name.
+     *
+     * @param name the name to check
+     * @return {@code true} if already exists
+     */
+    boolean existsByName(String name);
+
 }

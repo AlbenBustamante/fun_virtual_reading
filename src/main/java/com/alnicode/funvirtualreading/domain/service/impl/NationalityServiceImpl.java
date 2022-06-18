@@ -3,6 +3,7 @@ package com.alnicode.funvirtualreading.domain.service.impl;
 import com.alnicode.funvirtualreading.domain.dto.NationalityRequest;
 import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
 import com.alnicode.funvirtualreading.domain.service.INationalityService;
+import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import com.alnicode.funvirtualreading.persistence.entity.Nationality;
 import com.alnicode.funvirtualreading.persistence.mapper.NationalityMapper;
 import com.alnicode.funvirtualreading.persistence.repository.NationalityRepository;
@@ -12,6 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+import static com.alnicode.funvirtualreading.constants.NationalityConstants.COUNTRY_EXISTS;
+import static com.alnicode.funvirtualreading.constants.NationalityConstants.NAME_EXISTS;
 
 /**
  * The nationality service implementation.
@@ -30,7 +35,9 @@ public class NationalityServiceImpl implements INationalityService {
 
     @Override
     @Transactional
-    public NationalityResponse create(NationalityRequest request) {
+    public NationalityResponse create(NationalityRequest request) throws RegisterNotValidException {
+        checkData(request);
+
         return this.mapper.toResponse(this.repository.save(this.mapper.toEntity(request)));
     }
 
@@ -80,6 +87,16 @@ public class NationalityServiceImpl implements INationalityService {
     @Transactional(readOnly = true)
     public Optional<NationalityResponse> getByAuthorId(long userId) {
         return this.repository.findByUsersId(userId).map(mapper::toResponse);
+    }
+
+    private void checkData(NationalityRequest request) throws RegisterNotValidException {
+        if (repository.existsByName(request.getName())) {
+            throw new RegisterNotValidException(NAME_EXISTS, "name");
+        }
+
+        if (repository.findByCountry(request.getCountry()).isPresent()) {
+            throw new RegisterNotValidException(COUNTRY_EXISTS, "country");
+        }
     }
 
 }
