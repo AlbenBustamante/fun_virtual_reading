@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.validation.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,12 +63,34 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Customize the {@link RegisterNotValidException} response.
+     *
+     * @param ex the exception
+     * @return a {@link ResponseEntity} with the body
+     */
     @ExceptionHandler(RegisterNotValidException.class)
     public ResponseEntity<Object> handleRegisterNotValid(RegisterNotValidException ex) {
         final Map<String, String> body = new LinkedHashMap<>();
 
         body.put("timestamp", timestamp());
         body.put(ex.getField(), ex.getMessage());
+
+        return ResponseEntity.badRequest().body(body);
+    }
+
+    /**
+     * Customize the {@link DataIntegrityViolationException} response.
+     *
+     * @param ex the exception
+     * @return a {@link ResponseEntity} with the body
+     */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        final Map<String, String> body = new LinkedHashMap<>();
+
+        body.put("timestamp", timestamp());
+        body.put("error", ex.getMessage());
 
         return ResponseEntity.badRequest().body(body);
     }
