@@ -4,6 +4,10 @@ import com.alnicode.funvirtualreading.domain.dto.CollectionsBookRequest;
 import com.alnicode.funvirtualreading.domain.dto.CollectionsBookResponse;
 import com.alnicode.funvirtualreading.domain.service.ICollectionsBookService;
 import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static com.alnicode.funvirtualreading.constants.CollectionsBookConstants.COLLECTIONS_BOOKS_PATH;
 import static com.alnicode.funvirtualreading.constants.CollectionsBookConstants.MAIN_PATH;
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.API_KEY_NAME;
 
 /**
  * The collections-books rest controller.
@@ -45,6 +50,8 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the responses list
      */
     @GetMapping(MAIN_PATH)
+    @ApiOperation(value = "Get all the books that belong to a collection", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponse(code = 200, message = "OK")
     public ResponseEntity<List<CollectionsBookResponse>> getAll(@RequestParam(required = false) boolean rating) {
         return ResponseEntity.ok(rating ? service.getAll() : service.getAllOrderByRating());
     }
@@ -57,6 +64,10 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the response found
      */
     @GetMapping(COLLECTIONS_BOOKS_PATH)
+    @ApiOperation(value = "Get a book from a collection", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Book found!"),
+            @ApiResponse(code = 404, message = "Book or collection not found")})
     public ResponseEntity<CollectionsBookResponse> get(@Min(1L) @PathVariable("collectionId") long collectionId,
                                                        @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(service.get(collectionId, bookId));
@@ -71,11 +82,13 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the response registered
      */
     @PostMapping(COLLECTIONS_BOOKS_PATH)
+    @ApiOperation(value = "Add an existing book to a existing collection with the ID's", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Successful registration!"),
+            @ApiResponse(code = 400, message = "Something went wrong")})
     public ResponseEntity<CollectionsBookResponse> register(@Min(1L) @PathVariable("collectionId") long collectionId,
                                                             @Min(1L) @PathVariable("bookId") long bookId,
-                                                            @Valid @RequestBody CollectionsBookRequest request)
-            throws RegisterNotValidException {
-
+                                                            @Valid @RequestBody CollectionsBookRequest request) throws RegisterNotValidException {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(collectionId, bookId, request));
     }
 
@@ -88,6 +101,11 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the response updated
      */
     @PutMapping(COLLECTIONS_BOOKS_PATH)
+    @ApiOperation(value = "Update the properties from a book collection", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Properties updated successfully!"),
+            @ApiResponse(code = 400, message = "Something went wrong"),
+            @ApiResponse(code = 404, message = "Book or collection not found")})
     public ResponseEntity<CollectionsBookResponse> update(@Min(1L) @PathVariable("collectionId") long collectionId,
                                                           @Min(1L) @PathVariable("bookId") long bookId,
                                                           @Valid @RequestBody CollectionsBookRequest request) {
@@ -102,8 +120,13 @@ public class CollectionsBookController {
      * @return a {@link ResponseEntity} with the 200 or 404 code
      */
     @DeleteMapping(COLLECTIONS_BOOKS_PATH)
+    @ApiOperation(value = "Delete a book from a collection", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Successfully removed!"),
+            @ApiResponse(code = 404, message = "Book or collection not found")})
     public ResponseEntity<CollectionsBookResponse> delete(@Min(1L) @PathVariable("collectionId") long collectionId,
                                                           @Min(1L) @PathVariable("bookId") long bookId) {
         return service.delete(collectionId, bookId) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
+
 }

@@ -65,7 +65,7 @@ public abstract class CrudController<Request, Response> {
     @ApiOperation(value = "Get an item by the ID", authorizations = {@Authorization(API_KEY_NAME)})
     @ApiResponses({
             @ApiResponse(code = 200, message = "Item found"),
-            @ApiResponse(code = 404, message = "Item not found") })
+            @ApiResponse(code = 404, message = "Item not found")})
     public ResponseEntity<Response> get(@Min(1L) @PathVariable("id") long id) {
         return of(this.service().get(id));
     }
@@ -81,7 +81,7 @@ public abstract class CrudController<Request, Response> {
     @ApiOperation(value = "Create and register a new item", authorizations = {@Authorization(API_KEY_NAME)})
     @ApiResponses({
             @ApiResponse(code = 201, message = "Item registered successfully!"),
-            @ApiResponse(code = 400, message = "Something went wrong") })
+            @ApiResponse(code = 400, message = "Something went wrong")})
     public ResponseEntity<Response> register(@Valid @RequestBody Request request) throws RegisterNotValidException {
         return status(CREATED).body(this.service().create(request));
     }
@@ -98,7 +98,7 @@ public abstract class CrudController<Request, Response> {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Item updated successfully!"),
             @ApiResponse(code = 400, message = "Something went wrong"),
-            @ApiResponse(code = 404, message = "Item not found") })
+            @ApiResponse(code = 404, message = "Item not found")})
     public ResponseEntity<Response> update(@Min(1L) @PathVariable("id") long id,
                                            @Valid @RequestBody Request request) {
         return of(this.service().update(id, request));
@@ -114,7 +114,7 @@ public abstract class CrudController<Request, Response> {
     @ApiOperation(value = "Delete an existing item by the ID", authorizations = {@Authorization(API_KEY_NAME)})
     @ApiResponses({
             @ApiResponse(code = 200, message = "Item deleted successfully!"),
-            @ApiResponse(code = 404, message = "Item not found") })
+            @ApiResponse(code = 404, message = "Item not found")})
     public ResponseEntity<Response> delete(@Min(1L) @PathVariable("id") long id) {
         return this.service().delete(id) ? ok().build() : notFound().build();
     }

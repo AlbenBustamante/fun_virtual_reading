@@ -8,6 +8,10 @@ import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
 import com.alnicode.funvirtualreading.domain.service.INationalityService;
 import com.alnicode.funvirtualreading.domain.service.IUserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import static com.alnicode.funvirtualreading.constants.SwaggerConstants.API_KEY_NAME;
 import static com.alnicode.funvirtualreading.constants.UserConstants.LIKES_PATH;
 import static com.alnicode.funvirtualreading.constants.UserConstants.MAIN_PATH;
 
@@ -52,74 +57,96 @@ public class UserController extends CrudController<UserRequest, UserResponse> {
     }
 
     /**
-     * Get all the books published by the same person id.
+     * Get all the books published by the same user id.
      *
-     * @param personId the id to search
+     * @param userId the id to search
      * @return a {@link ResponseEntity} with the books list
      */
     @GetMapping("/{id}/books")
-    public ResponseEntity<List<BookResponse>> getAllPublishedBooks(@Min(1L) @PathVariable("id") long personId) {
-        return ResponseEntity.of(this.bookService.getByAuthorId(personId));
+    @ApiOperation(value = "Get all the books published by the same user", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Books found!"),
+            @ApiResponse(code = 404, message = "User not found")})
+    public ResponseEntity<List<BookResponse>> getAllPublishedBooks(@Min(1L) @PathVariable("id") long userId) {
+        return ResponseEntity.of(this.bookService.getByAuthorId(userId));
     }
 
     /**
-     * Get the person's nationality.
+     * Get the user's nationality.
      *
-     * @param personId the id to search
+     * @param userId the id to search
      * @return a {@link ResponseEntity} with the nationality found
      */
     @GetMapping("/{id}/nationality")
-    public ResponseEntity<NationalityResponse> getNationality(@Min(1L) @PathVariable("id") long personId) {
-        return ResponseEntity.of(this.nationalityService.getByAuthorId(personId));
+    @ApiOperation(value = "Get the user's nationality", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Nationality found!"),
+            @ApiResponse(code = 404, message = "User not found")})
+    public ResponseEntity<NationalityResponse> getNationality(@Min(1L) @PathVariable("id") long userId) {
+        return ResponseEntity.of(this.nationalityService.getByAuthorId(userId));
     }
 
     /**
-     * Get a person response by the email.
+     * Get a user response by the email.
      *
      * @param email the email to search
      * @return a {@link ResponseEntity} with the response found
      */
     @GetMapping("/email/{email}")
+    @ApiOperation(value = "Discover a user by the email", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "User found!"),
+            @ApiResponse(code = 404, message = "Email not found")})
     public ResponseEntity<UserResponse> getByEmail(@NotBlank @Email @PathVariable("email") String email) {
         return ResponseEntity.of(this.service.getByEmail(email));
     }
 
     /**
-     * Get all the persons with the same nationality id.
+     * Get all the users with the same nationality id.
      *
      * @param nationalityId the id to search
-     * @return a {@link ResponseEntity} with the persons list
+     * @return a {@link ResponseEntity} with the users list
      */
     @GetMapping("/nationality/{id}")
+    @ApiOperation(value = "Show all the users with the same nationality", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Users found!"),
+            @ApiResponse(code = 404, message = "Nationality not found")})
     public ResponseEntity<List<UserResponse>> getAllByNationality(@Min(1L) @PathVariable("id") long nationalityId) {
         return ResponseEntity.of(this.service.getByNationality(nationalityId));
     }
 
     /**
-     * Add a book to the person's likes list
+     * Add a book to the user's likes list
      *
      * @param userId the user id to add
-     * @param bookId   the book id to add
+     * @param bookId the book id to add
      * @return a {@link ResponseEntity} with the person response found
      */
     @PostMapping(LIKES_PATH)
-    public ResponseEntity<UserResponse> addLike(
-            @Min(1L) @PathVariable("id") long userId,
-            @Min(1L) @PathVariable("bookId") long bookId) {
+    @ApiOperation(value = "Add a book to the likes collection", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Book added successfully!"),
+            @ApiResponse(code = 404, message = "Book or user not found")})
+    public ResponseEntity<UserResponse> addLike(@Min(1L) @PathVariable("id") long userId,
+                                                @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(this.service.addLike(userId, bookId));
     }
 
     /**
-     * Remove a book to the person's likes list
+     * Remove a book to the user's likes list
      *
      * @param userId the user id to remove
-     * @param bookId   the book id to remove
+     * @param bookId the book id to remove
      * @return a {@link ResponseEntity} with the person response found
      */
     @DeleteMapping(LIKES_PATH)
-    public ResponseEntity<UserResponse> removeLike(
-            @Min(1L) @PathVariable("id") long userId,
-            @Min(1L) @PathVariable("bookId") long bookId) {
+    @ApiOperation(value = "Remove a book to the likes collection", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Book removed successfully!"),
+            @ApiResponse(code = 404, message = "Book or user not found")})
+    public ResponseEntity<UserResponse> removeLike(@Min(1L) @PathVariable("id") long userId,
+                                                   @Min(1L) @PathVariable("bookId") long bookId) {
         return ResponseEntity.of(this.service.removeLike(userId, bookId));
     }
 

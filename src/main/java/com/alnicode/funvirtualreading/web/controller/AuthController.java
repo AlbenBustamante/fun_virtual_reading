@@ -4,6 +4,9 @@ import com.alnicode.funvirtualreading.constants.UserConstants;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationRequest;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationResponse;
 import com.alnicode.funvirtualreading.web.config.security.jwt.JWTUtil;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
  * The authentication rest controller to get the JWT.
  *
  * @author Alben Bustamante
- * @since 1.0
  * @version 1.0
+ * @since 1.0
  */
 @RestController
 @RequestMapping(UserConstants.AUTH_PATH)
@@ -49,6 +52,11 @@ public class AuthController {
      * @return a {@link AuthenticationResponse} with the JWT
      */
     @PostMapping
+    @ApiOperation("Generate and get your token")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400, message = "Something went wrong"),
+            @ApiResponse(code = 403, message = "Bad credentials, try again")})
     public ResponseEntity<AuthenticationResponse> generateToken(@NotNull @Valid @RequestBody AuthenticationRequest request) {
         try {
             manager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
