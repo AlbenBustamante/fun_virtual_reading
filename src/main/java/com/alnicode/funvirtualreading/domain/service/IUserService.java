@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @version 1.0
  * @since 1.0
  */
-public interface IUserService extends ICrudService<UserRequest, UserResponse>, UserDetailsService {
+public interface IUserService extends ICrudService<UserRequest, UserResponse> {
 
     /**
      * Add a book to the likes collection.
