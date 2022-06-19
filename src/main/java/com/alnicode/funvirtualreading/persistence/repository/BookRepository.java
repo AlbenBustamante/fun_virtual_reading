@@ -17,7 +17,15 @@ import org.springframework.stereotype.Repository;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     /**
-     * Find the books with the same person id.
+     * Get all the books with the same tag ID.
+     *
+     * @param tagId the id to search
+     * @return an optional of the books found
+     */
+    Optional<List<Book>> findByTagsId(long tagId);
+
+    /**
+     * Find the books with the same user id.
      *
      * @param userId the id to search
      * @return a books list
