@@ -9,6 +9,9 @@ package com.alnicode.funvirtualreading.constants;
  */
 public final class BookConstants {
 
+    /* -< REQUEST MAPPING PATHS >- */
+    public static final String BOOKS_TAGS_PATH = "/{bookId}/tag/{tagId}";
+
     /* ===============================
        -> EXCEPTION MESSAGES
        =============================== */
