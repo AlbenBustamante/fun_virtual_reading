@@ -4,6 +4,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import lombok.Data;
 
+
+import static com.alnicode.funvirtualreading.constants.TagConstants.NAME_BLANK;
+import static com.alnicode.funvirtualreading.constants.TagConstants.NAME_SIZE;
+
 /**
  * The tag request model DTO.
  *
@@ -14,8 +18,8 @@ import lombok.Data;
 @Data
 public class TagRequest {
 
-    @NotBlank
-    @Size(min = 3, max = 40)
+    @NotBlank(message = NAME_BLANK)
+    @Size(min = 3, max = 40, message = NAME_SIZE)
     private final String name;
 
 }
