@@ -44,5 +44,6 @@ public interface BookMapper extends BaseMapper<BookResponse, Book> {
     @Mapping(target = "comments", ignore = true)
     @Mapping(target = "collections", ignore = true)
     @Mapping(target = "users", ignore = true)
+    @Mapping(target = "tags", ignore = true)
     Book toEntity(BookRequest request);
 }
