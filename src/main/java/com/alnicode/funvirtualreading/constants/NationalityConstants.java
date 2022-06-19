@@ -13,8 +13,9 @@ public final class NationalityConstants {
        -> REQUEST MAPPING PATHS
        =============================== */
     public static final String MAIN_PATH = "/nationalities";
-    public static final String SORTED_PATH = "/sorted";
     public static final String MAIN_SORTED_PATH = "/nationalities/sorted";
+    public static final String MAIN_ID_PATH = "/nationalities/{id}";
+    public static final String SORTED_PATH = "/sorted";
 
     /* ===============================
        -> EXCEPTION MESSAGES

@@ -2,6 +2,7 @@ package com.alnicode.funvirtualreading.web.config;
 
 import com.alnicode.funvirtualreading.constants.NationalityConstants;
 import com.alnicode.funvirtualreading.constants.UserConstants;
+import com.alnicode.funvirtualreading.enums.RoleType;
 import com.alnicode.funvirtualreading.web.config.jwt.JWTFilterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -66,6 +67,9 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, UserConstants.MAIN_PATH, UserConstants.AUTH_PATH).permitAll()
                 .antMatchers("/v2/api-docs", "/configuration/ui", "/configuration/security").permitAll() //Swagger #1
                 .antMatchers("/swagger-ui/**", "/swagger-resources/**", "/webjars/**").permitAll() //Swagger #2
+                .antMatchers(HttpMethod.POST, NationalityConstants.MAIN_PATH).hasRole(RoleType.ROLE_ADMIN.getName())
+                .antMatchers(HttpMethod.PUT, NationalityConstants.MAIN_ID_PATH).hasRole(RoleType.ROLE_ADMIN.getName())
+                .antMatchers(HttpMethod.DELETE, NationalityConstants.MAIN_ID_PATH).hasRole(RoleType.ROLE_ADMIN.getName())
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(filterRequest, UsernamePasswordAuthenticationFilter.class)
