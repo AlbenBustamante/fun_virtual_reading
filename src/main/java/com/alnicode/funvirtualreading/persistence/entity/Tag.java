@@ -1,11 +1,15 @@
 package com.alnicode.funvirtualreading.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +39,10 @@ public class Tag {
     @Column(unique = true, nullable = false, length = 40)
     private String name;
 
+    @ManyToMany(mappedBy = "tags")
+    @JsonIgnore
+    private Set<Book> books = new HashSet<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,4 +55,5 @@ public class Tag {
     public int hashCode() {
         return getClass().hashCode();
     }
+
 }

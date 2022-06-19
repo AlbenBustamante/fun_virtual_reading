@@ -2,6 +2,7 @@ package com.alnicode.funvirtualreading.persistence.entity;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -90,6 +92,13 @@ public class Book {
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<User> users = Collections.emptySet();
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "books_tags",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
+    private Set<Tag> tags = new HashSet<>();
+
     /**
      * Set the publication date before being registered.
      */
@@ -111,6 +120,26 @@ public class Book {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    /**
+     * Add an existing tag to the tags list.
+     *
+     * @param tag the tag to add
+     */
+    public void addTag(Tag tag) {
+        tags.add(tag);
+        tag.getBooks().add(this);
+    }
+
+    /**
+     * Remove an existing tag to the tags list.
+     *
+     * @param tag the tag to remove
+     */
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+        tag.getBooks().remove(this);
     }
 
 }
