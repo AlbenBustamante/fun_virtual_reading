@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.web.config.security;
 
+import com.alnicode.funvirtualreading.constants.NationalityConstants;
 import com.alnicode.funvirtualreading.constants.UserConstants;
 import com.alnicode.funvirtualreading.web.config.security.jwt.JWTFilterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, NationalityConstants.MAIN_PATH, NationalityConstants.MAIN_SORTED_PATH).permitAll()
                 .antMatchers(HttpMethod.POST, UserConstants.MAIN_PATH, UserConstants.AUTH_PATH).permitAll()
                 .antMatchers("/v2/api-docs", "/configuration/ui", "/configuration/security").permitAll() //Swagger #1
                 .antMatchers("/swagger-ui/**", "/swagger-resources/**", "/webjars/**").permitAll() //Swagger #2
