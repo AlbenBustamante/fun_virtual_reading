@@ -7,6 +7,7 @@ import com.alnicode.funvirtualreading.exception.RegisterNotValidException;
 import com.alnicode.funvirtualreading.persistence.entity.Book;
 import com.alnicode.funvirtualreading.persistence.mapper.BookMapper;
 import com.alnicode.funvirtualreading.persistence.repository.BookRepository;
+import com.alnicode.funvirtualreading.persistence.repository.TagRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class BookServiceImpl implements IBookService {
 
     @Autowired
     private BookRepository repository;
+
+    @Autowired
+    private TagRepository tagRepository;
 
     @Override
     @Transactional
@@ -85,6 +89,42 @@ public class BookServiceImpl implements IBookService {
     @Transactional(readOnly = true)
     public Optional<List<BookResponse>> getByGenre(long genreId) {
         return this.repository.findByGenreId(genreId).map(mapper::toResponses);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<List<BookResponse>> getByTagId(long tagId) {
+        return repository.findByTagsId(tagId).map(mapper::toResponses);
+    }
+
+    @Override
+    @Transactional
+    public Optional<BookResponse> addTag(long bookId, long tagId) {
+        final var tag = tagRepository.findById(tagId);
+        final var book = repository.findById(bookId);
+
+        if (tag.isEmpty() || book.isEmpty()) {
+            return Optional.empty();
+        }
+
+        book.get().addTag(tag.get());
+
+        return Optional.of(mapper.toResponse(repository.save(book.get())));
+    }
+
+    @Override
+    @Transactional
+    public Optional<BookResponse> removeTag(long bookId, long tagId) {
+        final var book = repository.findById(bookId);
+        final var tag = tagRepository.findById(tagId);
+
+        if (book.isEmpty() || tag.isEmpty()) {
+            return Optional.empty();
+        }
+
+        book.get().removeTag(tag.get());
+
+        return Optional.of(mapper.toResponse(repository.save(book.get())));
     }
 
     @Override

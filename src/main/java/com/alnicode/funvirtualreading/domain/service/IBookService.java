@@ -15,6 +15,24 @@ import java.util.Optional;
 public interface IBookService extends ICrudService<BookRequest, BookResponse> {
 
     /**
+     * Add an existing tag to the book.
+     *
+     * @param bookId the book to search
+     * @param tagId the tag to add
+     * @return an optional of book tag updated
+     */
+    Optional<BookResponse> addTag(long bookId, long tagId);
+
+    /**
+     * Remove an existing tag to the book.
+     *
+     * @param bookId the book to search
+     * @param tagId the tag to add
+     * @return an optional of the book updated
+     */
+    Optional<BookResponse> removeTag(long bookId, long tagId);
+
+    /**
      * Get book response DTO by the comment id.
      *
      * @param commentId the id to search
@@ -37,5 +55,13 @@ public interface IBookService extends ICrudService<BookRequest, BookResponse> {
      * @return a list with the responses found
      */
     Optional<List<BookResponse>> getByGenre(long genreId);
+
+    /**
+     * Get all the books with the same tag ID.
+     *
+     * @param tagId the id to search
+     * @return an optional of the books found
+     */
+    Optional<List<BookResponse>> getByTagId(long tagId);
 
 }
