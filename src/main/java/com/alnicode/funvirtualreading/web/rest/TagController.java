@@ -1,14 +1,19 @@
 package com.alnicode.funvirtualreading.web.rest;
 
+import com.alnicode.funvirtualreading.domain.dto.BookResponse;
 import com.alnicode.funvirtualreading.domain.dto.TagRequest;
 import com.alnicode.funvirtualreading.domain.dto.TagResponse;
+import com.alnicode.funvirtualreading.domain.service.IBookService;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
 import com.alnicode.funvirtualreading.domain.service.ITagService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
+import java.util.List;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -32,10 +37,12 @@ import static com.alnicode.funvirtualreading.constants.SwaggerConstants.API_KEY_
 @Validated
 public class TagController extends CrudController<TagRequest, TagResponse> {
     private final ITagService service;
+    private final IBookService bookService;
 
     @Autowired
-    public TagController(ITagService service) {
+    public TagController(ITagService service, IBookService bookService) {
         this.service = service;
+        this.bookService = bookService;
     }
 
     @Override
@@ -56,6 +63,21 @@ public class TagController extends CrudController<TagRequest, TagResponse> {
             @ApiResponse(code = 404, message = "Tag not found")})
     public ResponseEntity<TagResponse> getByName(@NotBlank @PathVariable("name") String name) {
         return ResponseEntity.of(service.getByName(name));
+    }
+
+    /**
+     * Get all the books with the same tag ID.
+     *
+     * @param tagId the id to search
+     * @return a {@link ResponseEntity} with the books found
+     */
+    @ApiOperation(value = "Get all the tag's books", authorizations = {@Authorization(API_KEY_NAME)})
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Books found!"),
+            @ApiResponse(code = 404, message = "Tag not found")})
+    @GetMapping("/{id}/books")
+    public ResponseEntity<List<BookResponse>> getBooks(@NotNull @Min(1L) @PathVariable("id") long tagId) {
+        return ResponseEntity.of(bookService.getByTagId(tagId));
     }
 
 }
