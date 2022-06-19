@@ -1,8 +1,8 @@
-package com.alnicode.funvirtualreading.web.config.security;
+package com.alnicode.funvirtualreading.web.config;
 
 import com.alnicode.funvirtualreading.constants.NationalityConstants;
 import com.alnicode.funvirtualreading.constants.UserConstants;
-import com.alnicode.funvirtualreading.web.config.security.jwt.JWTFilterRequest;
+import com.alnicode.funvirtualreading.web.config.jwt.JWTFilterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -3,7 +3,7 @@ package com.alnicode.funvirtualreading.web.rest;
 import com.alnicode.funvirtualreading.constants.UserConstants;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationRequest;
 import com.alnicode.funvirtualreading.domain.dto.AuthenticationResponse;
-import com.alnicode.funvirtualreading.web.config.security.jwt.JWTUtil;
+import com.alnicode.funvirtualreading.web.config.jwt.JWTUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

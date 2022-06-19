@@ -1,4 +1,4 @@
-package com.alnicode.funvirtualreading.web.config.security.jwt;
+package com.alnicode.funvirtualreading.web.config.jwt;
 
 import com.alnicode.funvirtualreading.constants.UserConstants;
 import java.io.IOException;
