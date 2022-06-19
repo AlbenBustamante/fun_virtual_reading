@@ -1,5 +1,6 @@
 package com.alnicode.funvirtualreading.web.rest;
 
+import com.alnicode.funvirtualreading.constants.NationalityConstants;
 import com.alnicode.funvirtualreading.domain.dto.NationalityRequest;
 import com.alnicode.funvirtualreading.domain.dto.NationalityResponse;
 import com.alnicode.funvirtualreading.domain.service.ICrudService;
@@ -30,7 +31,7 @@ import static com.alnicode.funvirtualreading.constants.SwaggerConstants.API_KEY_
  */
 @Validated
 @RestController
-@RequestMapping("/nationalities")
+@RequestMapping(NationalityConstants.MAIN_PATH)
 public class NationalityController extends CrudController<NationalityRequest, NationalityResponse> {
     @Autowired
     private INationalityService service;
@@ -45,7 +46,7 @@ public class NationalityController extends CrudController<NationalityRequest, Na
      *
      * @return a {@link ResponseEntity} with the nationalities list
      */
-    @GetMapping("/sorted")
+    @GetMapping(NationalityConstants.SORTED_PATH)
     @ApiOperation(value = "Get a sorted list of all the registered nationalities", authorizations = {@Authorization(API_KEY_NAME)})
     @ApiResponse(code = 200, message = "OK")
     public ResponseEntity<List<NationalityResponse>> getAllSorted() {

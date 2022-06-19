@@ -10,6 +10,13 @@ package com.alnicode.funvirtualreading.constants;
 public final class NationalityConstants {
 
     /* ===============================
+       -> REQUEST MAPPING PATHS
+       =============================== */
+    public static final String MAIN_PATH = "/nationalities";
+    public static final String SORTED_PATH = "/sorted";
+    public static final String MAIN_SORTED_PATH = "/nationalities/sorted";
+
+    /* ===============================
        -> EXCEPTION MESSAGES
        =============================== */
     public static final String COUNTRY_EXISTS = "This country is already in use, try another";
